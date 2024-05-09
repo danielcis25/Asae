@@ -1,0 +1,28 @@
+package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class DocenteDTORespuesta {
+    //atr persona
+    private int idpersona;
+    private String tipoidentificacion;
+    private String numeroidentificacion;
+    private String nombres;
+    private String apellidos;
+    //---
+    private String correo;
+    private String vinculacion;
+    private TelefonoDTORespuesta objTelefono;
+    private List<RespuestaDTORespuesta> listaRespuestas;
+    private List<DepartamentoDTORespuesta> listaDepartamentos;
+
+    public DocenteDTORespuesta() {
+
+    }
+}

@@ -11,6 +11,6 @@ public interface GestionarCuestionarioCUIntPort {
 
     public List<Cuestionario> listarRespuestasCuestionarios();
 
-    //Registrar respuesta cuestionario?
+    //=====Registrar respuesta cuestionario?
 
 }
