@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Primary;
 public class CuestionarioMapper {
     @Bean
     //@Qualifier("CuestionarioModelMapper")
-    @Primary
     public ModelMapper crearCuestionarioMapper() {
         return new ModelMapper();
     }

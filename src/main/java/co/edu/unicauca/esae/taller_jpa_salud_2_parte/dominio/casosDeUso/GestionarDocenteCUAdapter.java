@@ -8,31 +8,36 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.Gestionar
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Docente;
 
 public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
-    private final GestionarDocenteGatewayIntPort objGestionarDocenteateway;
-    private final CuestionarioFormateadorResultadoIntPort objDocenteFormateadorResultados;
+    private final GestionarDocenteGatewayIntPort objGestionarDocenteGateway;
+    private final CuestionarioFormateadorResultadoIntPort objCuestionarioFormateadorResultados;
 
-    public GestionarDocenteCUAdapter(GestionarDocenteGatewayIntPort objRegistrarDocenteGateway,
-    CuestionarioFormateadorResultadoIntPort objDocenteFormateadorResultados){
-        this.objGestionarDocenteateway = objRegistrarDocenteGateway;
-        this.objDocenteFormateadorResultados = objDocenteFormateadorResultados;
+    public GestionarDocenteCUAdapter(GestionarDocenteGatewayIntPort objManagementDocenteGateway,
+    CuestionarioFormateadorResultadoIntPort objCuestionarioFormateadorResultados){
+        this.objGestionarDocenteGateway = objManagementDocenteGateway;
+        this.objCuestionarioFormateadorResultados = objCuestionarioFormateadorResultados;
     }
 
     @Override
     public Docente registrarDocente(Docente objDocente) {
+
+
+
        Docente objDocenteCreado = null;
-       if (this.objGestionarDocenteateway.existeDocentePorId(objDocente.getIdpersona())) {
-            this.objDocenteFormateadorResultados.retornarRespuestaErrorEntidadExiste("Error. Ya existe un docente con ese ID ");
+       if (this.objGestionarDocenteGateway.existeDocentePorId(objDocente.getIdpersona())) {
+            this.objCuestionarioFormateadorResultados.
+                    retornarRespuestaErrorEntidadExiste("Error. Ya existe un docente con ese ID ");
        }else{
         //objDocente.setIdpersona(0);
-        objDocenteCreado = this.objGestionarDocenteateway.guardar(objDocente);
+        objDocenteCreado = this.objGestionarDocenteGateway.guardar(objDocente);
        }
        return objDocenteCreado;
     }
 
     @Override
     public List<Docente> listar() {
-        List<Docente> listaObtenida = objGestionarDocenteateway.listar();
-        return listaObtenida;
+        //List<Docente> listaObtenida = objGestionarDocenteateway.listar();
+        //return listaObtenida;
+        return this.objGestionarDocenteGateway.listar();
     }
 
 }

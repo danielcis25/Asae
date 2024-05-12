@@ -4,22 +4,27 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.GestionarDocenteGatewayIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Docente;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.DocenteEntity;
-import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.DocenteRepositoryInt;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.DocenteRepository;
 @Service
+
 public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatewayIntPort{
-    private final DocenteRepositoryInt objDocenteRepository;
+
     private final ModelMapper DocenteModelMapper;
-    public GestionarDocenteGatewayImplAdapter(DocenteRepositoryInt objDocenteRepository,
-    ModelMapper DocenteModelMapper){
+    private final DocenteRepository objDocenteRepository;
+
+    public GestionarDocenteGatewayImplAdapter( DocenteRepository objDocenteRepository,
+                                               ModelMapper DocenteModelMapper
+                                              ){
         this.objDocenteRepository = objDocenteRepository;
         this.DocenteModelMapper = DocenteModelMapper;
     } 
+
+
 
     @Override
     public boolean existeDocentePorId(int idDocente) {

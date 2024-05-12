@@ -3,20 +3,19 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.per
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.GestionarCuestionarioGatewayIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.CuestionarioEntity;
-import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.CuestionarioRepositoryInt;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.CuestionarioRepository;
 @Service
 public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestionarioGatewayIntPort {
 
-    private final CuestionarioRepositoryInt objCuestionarioRepository;
+    private final CuestionarioRepository objCuestionarioRepository;
     private final ModelMapper CuestionarioModelMapper;
 
-    public GestionarCuestionarioGatewayImplAdapter(CuestionarioRepositoryInt objCuestionarioRepository,
-     ModelMapper CuestionarioModelMapper){
+    public GestionarCuestionarioGatewayImplAdapter(CuestionarioRepository objCuestionarioRepository,
+                                                   ModelMapper CuestionarioModelMapper){
         this.objCuestionarioRepository = objCuestionarioRepository;
         this.CuestionarioModelMapper = CuestionarioModelMapper;
     }

@@ -5,12 +5,13 @@ import java.util.List;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
 
 public interface GestionarCuestionarioCUIntPort {
-    public Cuestionario crearCuestionario(Cuestionario objCuestionario);
+    public Cuestionario crearCuestionario(Cuestionario cuestionario);
 
-    public List<Cuestionario> listarCuestionarios();
+    Cuestionario asignarPreguntaCuestionario(Integer idPregunta);
 
     public List<Cuestionario> listarRespuestasCuestionarios();
 
-    //=====Registrar respuesta cuestionario?
+    public List<Cuestionario> listarCuestionarios();
+
 
 }

@@ -29,8 +29,11 @@ public class DocenteRestController {
 
     @PostMapping("/docentes")
     public ResponseEntity<DocenteDTORespuesta> create(@RequestBody DocenteDTOPeticion objDocente) {
+
         Docente objDocenteCrear = objMapeador.mappearDePeticionADocente(objDocente);
+
         Docente objDocenteCreado = objGestionarDocenteCUInt.registrarDocente(objDocenteCrear);
+
         ResponseEntity<DocenteDTORespuesta> objRespuesta = new ResponseEntity<DocenteDTORespuesta>(
                 objMapeador.mappearDeDocenteARespuesta(objDocenteCreado),
                 HttpStatus.CREATED);

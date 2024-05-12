@@ -2,6 +2,8 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.per
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.Size;
+
 @Getter
 @Setter
 @Entity

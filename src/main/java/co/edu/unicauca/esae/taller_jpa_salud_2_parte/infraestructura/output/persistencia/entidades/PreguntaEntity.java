@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.Size;
 
 
 @Getter

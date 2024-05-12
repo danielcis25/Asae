@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Getter
 @Setter
 @Entity
@@ -12,6 +15,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "Respuesta")
 public class RespuestaEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idrespuesta;

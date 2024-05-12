@@ -13,4 +13,6 @@ public interface GestionarCuestionarioGatewayIntPort {
     public List<Cuestionario> listarCuestionarios();
 
     public List<Cuestionario> listarRespuestasCuestionarios();
+
+    public Cuestionario asignarPreguntaCuestionario(Integer idPregunta);
 }

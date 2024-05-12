@@ -4,6 +4,9 @@ import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 @Getter
 @Setter
@@ -23,7 +26,6 @@ public class TipoPreguntaEntity {
 
     @Column(nullable = false, length = 30)
     private String descripcion;
-
 
     @OneToMany(mappedBy = "objTipoPregunta")
     private List<PreguntaEntity> preguntas;

@@ -6,6 +6,10 @@ import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 @Getter
 @Setter
