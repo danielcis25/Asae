@@ -16,7 +16,7 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
     private final ModelMapper CuestionarioModelMapper;
 
     public GestionarCuestionarioGatewayImplAdapter(CuestionarioRepositoryInt objCuestionarioRepository,
-    @Qualifier("CuestionarioModelMapper") ModelMapper CuestionarioModelMapper){
+     ModelMapper CuestionarioModelMapper){
         this.objCuestionarioRepository = objCuestionarioRepository;
         this.CuestionarioModelMapper = CuestionarioModelMapper;
     }

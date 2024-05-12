@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DocenteMapper {
     @Bean
-    @Qualifier("DocenteModelMapper")
+    //@Qualifier("DocenteModelMapper")
+    
     public ModelMapper crearDocenteMapper() {
         return new ModelMapper();
     }

@@ -3,11 +3,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class CuestionarioMapper {
     @Bean
-    @Qualifier("CuestionarioModelMapper")
+    //@Qualifier("CuestionarioModelMapper")
+    @Primary
     public ModelMapper crearCuestionarioMapper() {
         return new ModelMapper();
     }
