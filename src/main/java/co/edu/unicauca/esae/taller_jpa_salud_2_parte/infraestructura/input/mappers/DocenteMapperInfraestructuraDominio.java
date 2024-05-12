@@ -5,14 +5,15 @@ import java.util.List;
 import org.mapstruct.Mapper;
 
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Docente;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOpeticion.DocenteDTOPeticion;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.DocenteDTORespuesta;
 @Mapper(componentModel = "spring")
 public interface DocenteMapperInfraestructuraDominio {
-    Docente mappearDePeticionADocente(DocenteDTORespuesta peticion);
+    Docente mappearDePeticionADocente(DocenteDTOPeticion peticion);
 
     DocenteDTORespuesta mappearDeDocenteARespuesta(Docente docente);
 
-    List<DocenteDTORespuesta> mappearDeDcoentesARespuesta(List<Docente> docentes);
+    List<DocenteDTORespuesta> mappearDeDocentesARespuesta(List<Docente> docentes);
 
     
 

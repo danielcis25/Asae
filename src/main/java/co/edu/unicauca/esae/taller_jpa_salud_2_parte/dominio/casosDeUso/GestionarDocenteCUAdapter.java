@@ -1,5 +1,7 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.casosDeUso;
 
+import java.util.List;
+
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.input.GestionarDocenteCUIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.CuestionarioFormateadorResultadoIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.GestionarDocenteGatewayIntPort;
@@ -25,6 +27,12 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
         objDocenteCreado = this.objGestionarDocenteateway.guardar(objDocente);
        }
        return objDocenteCreado;
+    }
+
+    @Override
+    public List<Docente> listar() {
+        List<Docente> listaObtenida = objGestionarDocenteateway.listar();
+        return listaObtenida;
     }
 
 }
