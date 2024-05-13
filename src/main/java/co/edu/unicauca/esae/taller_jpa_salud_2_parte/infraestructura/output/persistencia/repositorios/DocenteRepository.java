@@ -12,7 +12,7 @@ public interface DocenteRepository extends CrudRepository<DocenteEntity,Integer>
 
     DocenteEntity findByCorreo(String correo);
 
-    int existeDocentePorId(int idDocente);
+    int existsById(int idDocente);
 }
 
 

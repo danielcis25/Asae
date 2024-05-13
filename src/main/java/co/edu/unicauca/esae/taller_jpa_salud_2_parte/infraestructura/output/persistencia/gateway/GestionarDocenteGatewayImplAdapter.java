@@ -26,7 +26,7 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
 
     @Override
     public boolean existeDocentePorId(int idDocente) {
-        return this.objDocenteRepository.existeDocentePorId(idDocente) == 1;
+        return this.objDocenteRepository.existsById(idDocente) == 1;
     }
 
     @Override

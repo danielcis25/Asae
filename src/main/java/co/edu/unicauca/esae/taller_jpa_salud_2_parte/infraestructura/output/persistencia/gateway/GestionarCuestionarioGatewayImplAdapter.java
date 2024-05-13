@@ -65,7 +65,7 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
     public List<CuestionarioDTORespuesta> consultarCuestionarioPorPatron(String titulo) {
         System.out.println("patron " + titulo);
 
-        Iterable<CuestionarioEntity> cuestionario = this.objCuestionarioRepository.findByTituloIgnoreCaseContainingOrderByIdCuestionario(titulo);;
+        Iterable<CuestionarioEntity> cuestionario = this.objCuestionarioRepository.findByTituloIgnoreCaseContainingOrderByIdcuestionario(titulo);;
         List<CuestionarioDTORespuesta> listCuestionarios = this.CuestionarioModelMapper.map(cuestionario, new TypeToken<List<CuestionarioDTORespuesta>>() {
         }.getType());
         return listCuestionarios;

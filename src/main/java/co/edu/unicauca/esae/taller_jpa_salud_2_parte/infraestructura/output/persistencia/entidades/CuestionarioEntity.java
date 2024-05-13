@@ -9,7 +9,6 @@ import lombok.*;
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "Cuestionarios")
 
 public class CuestionarioEntity {

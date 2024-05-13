@@ -14,7 +14,7 @@ public interface CuestionarioRepository extends CrudRepository<CuestionarioEntit
     Integer existeCuestionarioPorTitulo(String titulo);
 
 
-    List<CuestionarioEntity> findByTituloIgnoreCaseContainingOrderByIdCuestionario(String patron);
+    List<CuestionarioEntity> findByTituloIgnoreCaseContainingOrderByIdcuestionario(String patron);
 
     boolean existsByTitulo(@Param("titulo") String titulo);
 
