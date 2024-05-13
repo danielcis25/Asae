@@ -17,17 +17,14 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
         this.objCuestionarioFormateadorResultados = objCuestionarioFormateadorResultados;
     }
 
+
     @Override
     public Docente registrarDocente(Docente objDocente) {
-
-
-
        Docente objDocenteCreado = null;
        if (this.objGestionarDocenteGateway.existeDocentePorId(objDocente.getIdpersona())) {
             this.objCuestionarioFormateadorResultados.
                     retornarRespuestaErrorEntidadExiste("Error. Ya existe un docente con ese ID ");
        }else{
-        //objDocente.setIdpersona(0);
         objDocenteCreado = this.objGestionarDocenteGateway.guardar(objDocente);
        }
        return objDocenteCreado;
@@ -41,3 +38,5 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
     }
 
 }
+
+

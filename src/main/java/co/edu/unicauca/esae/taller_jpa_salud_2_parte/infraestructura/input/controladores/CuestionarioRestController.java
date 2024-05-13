@@ -4,11 +4,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.input.GestionarCuestionarioCUIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
@@ -41,6 +37,16 @@ public class CuestionarioRestController {
                 objMapeador.mappearDeCuestionariosARespuesta(this.objGestionarCuestionarioCUInt.listarCuestionarios()),
                 HttpStatus.OK);
         return objRespuesta;
+    }
+
+    @GetMapping("/cuestionarios/patron-titulo")
+    public ResponseEntity<List<CuestionarioDTORespuesta>> findAllPatron(@RequestParam String patronTitulo ) {
+        List<CuestionarioDTORespuesta> publicaciones = this.objGestionarCuestionarioCUInt.consultarCuestionarioPorPatron(patronTitulo);
+
+        ResponseEntity<List<CuestionarioDTORespuesta>> response = new ResponseEntity<List<CuestionarioDTORespuesta>>
+                (publicaciones,
+                        HttpStatus.OK);
+        return response;
     }
 
 }

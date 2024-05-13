@@ -1,6 +1,8 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.gateway;
 
 import java.util.List;
+
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.CuestionarioDTORespuesta;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
@@ -54,4 +56,18 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
         return null;
     }
 
+    @Override
+    public Cuestionario consultarCuestionarioPorTitulo(String titulo) {
+        return this.CuestionarioModelMapper.map(this.objCuestionarioRepository.findByTitulo(titulo), Cuestionario.class);
+    }
+
+    @Override
+    public List<CuestionarioDTORespuesta> consultarCuestionarioPorPatron(String titulo) {
+        System.out.println("patron " + titulo);
+
+        Iterable<CuestionarioEntity> cuestionario = this.objCuestionarioRepository.findByTituloIgnoreCaseContainingOrderByIdCuestionario(titulo);;
+        List<CuestionarioDTORespuesta> listCuestionarios = this.CuestionarioModelMapper.map(cuestionario, new TypeToken<List<CuestionarioDTORespuesta>>() {
+        }.getType());
+        return listCuestionarios;
+    }
 }

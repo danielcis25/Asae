@@ -5,30 +5,24 @@ import java.util.List;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.input.GestionarCuestionarioCUIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.CuestionarioFormateadorResultadoIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.GestionarCuestionarioGatewayIntPort;
-import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.GestionarDocenteGatewayIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
-import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.ExcepcionesPropias.EntidadYaExisteException;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.CuestionarioDTORespuesta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.ExcepcionesPropias.EntidadNoExisteException;
 
 public class GestionarCuestionarioCUAdapter implements GestionarCuestionarioCUIntPort {
 
     private final GestionarCuestionarioGatewayIntPort objGestionarCuestionarioGateway;
     private final CuestionarioFormateadorResultadoIntPort objCuestionarioFormateadorResultados;
-    private GestionarDocenteGatewayIntPort objGestionarDocenteGateway = null;
 
     public GestionarCuestionarioCUAdapter(GestionarCuestionarioGatewayIntPort objRegistrarCuestionarioGateway,
                                           CuestionarioFormateadorResultadoIntPort objCuestionarioFormateadorResultados){
         this.objGestionarCuestionarioGateway = objRegistrarCuestionarioGateway;
         this.objCuestionarioFormateadorResultados = objCuestionarioFormateadorResultados;
-        this.objGestionarDocenteGateway = objGestionarDocenteGateway;
     }
 
     @Override
     public Cuestionario crearCuestionario(Cuestionario cuestionario) {
 
-        if(this.objGestionarCuestionarioGateway.existeCuestionarioPorTitulo(cuestionario.getTitulo())){
-            EntidadYaExisteException objException = new EntidadYaExisteException("El Cuestionario con titulo: " + cuestionario.getTitulo() + " ya existe");
-            throw  objException;
-        }
 
         Cuestionario objCuestionarioCreado = null;
         if(this.objGestionarCuestionarioGateway.existeCuestionarioPorTitulo(cuestionario.getTitulo())){
@@ -44,18 +38,29 @@ public class GestionarCuestionarioCUAdapter implements GestionarCuestionarioCUIn
 
     @Override
     public List<Cuestionario> listarCuestionarios() {
-      
         List<Cuestionario> listaCuestionarios = this.objGestionarCuestionarioGateway.listarCuestionarios();
         return listaCuestionarios;
     }
 
+    @Override
+    public List<CuestionarioDTORespuesta> consultarCuestionarioPorPatron(String titulo){
+        return this.objGestionarCuestionarioGateway.consultarCuestionarioPorPatron(titulo);
+    }
 
+    @Override
+    public Cuestionario consultarCuestionarioPorTitulo(String titulo){
+        if(this.objGestionarCuestionarioGateway.existeCuestionarioPorTitulo(titulo)){
+            return this.objGestionarCuestionarioGateway.consultarCuestionarioPorTitulo(titulo);
+        }
+
+        EntidadNoExisteException objException = new EntidadNoExisteException("No existe publicacion con el titulo" + titulo );
+        throw  objException;
+
+    }
 
     @Override
     public Cuestionario asignarPreguntaCuestionario(Integer idPregunta) {
-
         Cuestionario preguntaCuestionario = this.objGestionarCuestionarioGateway.asignarPreguntaCuestionario(idPregunta);
-
         return null;
     }
 
