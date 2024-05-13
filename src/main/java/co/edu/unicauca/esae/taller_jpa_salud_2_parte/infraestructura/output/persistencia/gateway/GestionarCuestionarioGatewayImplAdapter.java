@@ -46,4 +46,9 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
         throw new UnsupportedOperationException("Unimplemented method 'listarRespuestasCuestionarios'");
     }
 
+    @Override
+    public Cuestionario asignarPreguntaCuestionario(Integer idPregunta) {
+        return null;
+    }
+
 }
