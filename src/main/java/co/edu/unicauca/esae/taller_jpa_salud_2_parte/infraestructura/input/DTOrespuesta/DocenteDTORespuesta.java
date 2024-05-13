@@ -9,13 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DocenteDTORespuesta extends PersonaDTORespuesta {
-    //atr persona
-    // private int idpersona;
-    // private String tipoidentificacion;
-    // private String numeroidentificacion;
-    // private String nombres;
-    // private String apellidos;
-    //---
+
     private String correo;
     private String vinculacion;
     private TelefonoDTORespuesta objTelefono;
@@ -24,5 +18,9 @@ public class DocenteDTORespuesta extends PersonaDTORespuesta {
 
     public DocenteDTORespuesta(int idpersona, String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {
         super(idpersona, tipoidentificacion, numeroidentificacion, nombres, apellidos);
+    }
+
+    public DocenteDTORespuesta() {
+
     }
 }

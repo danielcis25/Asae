@@ -10,5 +10,10 @@ public class Telefono {
     private String tipotelefono;
     private String numero;
     private Docente objDocente;
-    
+
+    public Telefono(Integer idtelefono, String tipotelefono, String numero) {
+        this.idtelefono = idtelefono;
+        this.tipotelefono = tipotelefono;
+        this.numero = numero;
+    }
 }

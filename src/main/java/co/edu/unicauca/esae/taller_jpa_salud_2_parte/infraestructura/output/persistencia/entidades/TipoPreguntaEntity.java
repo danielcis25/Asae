@@ -29,5 +29,5 @@ public class TipoPreguntaEntity {
 
     @OneToMany(mappedBy = "objTipoPregunta")
     private List<PreguntaEntity> preguntas;
-
 }
+

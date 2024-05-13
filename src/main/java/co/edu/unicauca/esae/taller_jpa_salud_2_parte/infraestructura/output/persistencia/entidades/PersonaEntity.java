@@ -14,6 +14,14 @@ import javax.validation.constraints.Size;
 @Table(name = "Personas")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class PersonaEntity {
+
+    public PersonaEntity(String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {
+        this.tipoidentificacion = tipoidentificacion;
+        this.numeroidentificacion = numeroidentificacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idpersona;

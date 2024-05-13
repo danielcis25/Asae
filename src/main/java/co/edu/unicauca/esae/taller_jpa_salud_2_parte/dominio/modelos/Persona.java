@@ -12,6 +12,14 @@ public class Persona {
     private String nombres;
     private String apellidos;
 
+    public Persona(String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {
+        this.tipoidentificacion = tipoidentificacion;
+        this.numeroidentificacion = numeroidentificacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+    }
 
-    
+    public Persona() {
+
+    }
 }

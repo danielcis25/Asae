@@ -19,11 +19,14 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
         this.objCuestionarioRepository = objCuestionarioRepository;
         this.CuestionarioModelMapper = CuestionarioModelMapper;
     }
+
+    //
     @Override
     public boolean existeCuestionarioPorTitulo(String titulo) {
         return this.objCuestionarioRepository.existeCuestionarioPorTitulo(titulo) == 1;
     }
 
+    //
     @Override
     public Cuestionario guardarCuestionario(Cuestionario objCuestionario) {
         CuestionarioEntity objCuestionarioEntity = this.CuestionarioModelMapper.map(objCuestionario, CuestionarioEntity.class);

@@ -13,10 +13,10 @@ public class GestionarCuestionarioCUAdapter implements GestionarCuestionarioCUIn
 
     private final GestionarCuestionarioGatewayIntPort objGestionarCuestionarioGateway;
     private final CuestionarioFormateadorResultadoIntPort objCuestionarioFormateadorResultados;
-    private final GestionarDocenteGatewayIntPort objGestionarDocenteGateway;
+    private GestionarDocenteGatewayIntPort objGestionarDocenteGateway = null;
 
     public GestionarCuestionarioCUAdapter(GestionarCuestionarioGatewayIntPort objRegistrarCuestionarioGateway,
-                                          CuestionarioFormateadorResultadoIntPort objCuestionarioFormateadorResultados, GestionarDocenteGatewayIntPort objGestionarDocenteGateway){
+                                          CuestionarioFormateadorResultadoIntPort objCuestionarioFormateadorResultados){
         this.objGestionarCuestionarioGateway = objRegistrarCuestionarioGateway;
         this.objCuestionarioFormateadorResultados = objCuestionarioFormateadorResultados;
         this.objGestionarDocenteGateway = objGestionarDocenteGateway;

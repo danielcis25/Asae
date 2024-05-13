@@ -12,7 +12,7 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.pers
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.DocenteRepository;
 @Service
 
-public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatewayIntPort{
+public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatewayIntPort {
 
     private final ModelMapper DocenteModelMapper;
     private final DocenteRepository objDocenteRepository;
@@ -22,9 +22,7 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
                                               ){
         this.objDocenteRepository = objDocenteRepository;
         this.DocenteModelMapper = DocenteModelMapper;
-    } 
-
-
+    }
 
     @Override
     public boolean existeDocentePorId(int idDocente) {

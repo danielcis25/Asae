@@ -21,5 +21,5 @@ public class DepartamentoEntity {
 
     @Column( nullable = false, length = 30)
     private String descripcion;
-    
+
 }

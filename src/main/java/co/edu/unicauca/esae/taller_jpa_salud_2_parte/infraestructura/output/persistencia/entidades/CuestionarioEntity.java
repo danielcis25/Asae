@@ -13,6 +13,14 @@ import lombok.*;
 @Table(name = "Cuestionarios")
 
 public class CuestionarioEntity {
+
+    public CuestionarioEntity(String titulo, String descripcion) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+    }
+    public CuestionarioEntity() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idcuestionario;

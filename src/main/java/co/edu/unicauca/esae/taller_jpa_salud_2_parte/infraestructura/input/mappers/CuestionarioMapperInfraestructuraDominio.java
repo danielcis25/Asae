@@ -2,6 +2,8 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.mapp
 
 import java.util.List;
 
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Pregunta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.PreguntaDTORespuesta;
 import org.mapstruct.Mapper;
 
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
@@ -16,5 +18,9 @@ public interface CuestionarioMapperInfraestructuraDominio {
     CuestionarioDTORespuesta mappearDeCuestionarioARespuesta(Cuestionario cuestionario);
 
     List<CuestionarioDTORespuesta> mappearDeCuestionariosARespuesta(List<Cuestionario> cuestionarios);
+
+    List<PreguntaDTORespuesta> mappearPreguntasARespuesta( );
+
+    List<Pregunta> mappearPeticionAPregunta( );
 
 }

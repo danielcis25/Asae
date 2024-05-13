@@ -15,6 +15,4 @@ public interface DocenteMapperInfraestructuraDominio {
 
     List<DocenteDTORespuesta> mappearDeDocentesARespuesta(List<Docente> docentes);
 
-    
-
 }
