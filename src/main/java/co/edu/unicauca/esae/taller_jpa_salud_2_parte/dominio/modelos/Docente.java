@@ -33,4 +33,12 @@ public class Docente extends Persona{
     }
 
 
+    public Docente(Integer idPersona, String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos, String correo, String vinculacion, Telefono telefono) {
+        super(idPersona, tipoIdentificacion, numeroIdentificacion, nombres, apellidos);
+        this.correo = correo;
+        this.vinculacion = vinculacion;
+        this.objTelefono = telefono;
+    }
+
+
 }

@@ -38,5 +38,8 @@ public class DocenteDTOPeticion extends PersonaDTOPeticion {
     public DocenteDTOPeticion(int idpersona, String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {
         super(idpersona, tipoidentificacion, numeroidentificacion, nombres, apellidos);
     }
+    public DocenteDTOPeticion(){
+        
+    }
 
 }

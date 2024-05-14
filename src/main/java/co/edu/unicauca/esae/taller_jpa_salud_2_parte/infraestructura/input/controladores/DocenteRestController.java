@@ -1,6 +1,8 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.controladores;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
@@ -30,16 +32,25 @@ public class DocenteRestController {
     private final DocenteMapperInfraestructuraDominio objMapeador;
     private final ModelMapper modelMapper;
 
+    // @PostMapping("/docentes")
+    // public ResponseEntity<DocenteDTORespuesta> create(@Valid @RequestBody DocenteDTOPeticion objDocente) {
+    //     Docente objDocenteCrear = objMapeador.mappearDePeticionADocente(objDocente);
+    //     Docente objDocenteCreado = objGestionarDocenteCUInt.registrarDocente(objDocenteCrear);
+    //     ResponseEntity<DocenteDTORespuesta> objRespuesta = new ResponseEntity<DocenteDTORespuesta>(
+    //             objMapeador.mappearDeDocenteARespuesta(objDocenteCreado),
+    //             HttpStatus.CREATED);
+    //     return objRespuesta;
+    // }
+
     @PostMapping("/docentes")
-    public ResponseEntity<DocenteDTORespuesta> create(@RequestBody DocenteDTOPeticion objDocente) {
-        Docente objDocenteCrear = objMapeador.mappearDePeticionADocente(objDocente);
-        Docente objDocenteCreado = objGestionarDocenteCUInt.registrarDocente(objDocenteCrear);
+    public ResponseEntity<DocenteDTORespuesta> create(@Valid @RequestBody DocenteDTOPeticion objDocente) {
+        Docente objDocenteCrear = modelMapper.map(objDocente, Docente.class);
+        Docente objDocenteCreado = objGestionarDocenteCUInt.registrarDocente(modelMapper.map(objDocenteCrear,Docente.class));
         ResponseEntity<DocenteDTORespuesta> objRespuesta = new ResponseEntity<DocenteDTORespuesta>(
-                objMapeador.mappearDeDocenteARespuesta(objDocenteCreado),
+                modelMapper.map(objDocenteCreado, DocenteDTORespuesta.class),
                 HttpStatus.CREATED);
         return objRespuesta;
     }
-
 
     @GetMapping("/docentes")
     public ResponseEntity<List<DocenteDTORespuesta>> listar() {

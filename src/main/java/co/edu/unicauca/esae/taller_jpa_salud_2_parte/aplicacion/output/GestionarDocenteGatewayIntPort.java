@@ -11,6 +11,8 @@ public interface GestionarDocenteGatewayIntPort {
 
     public Docente guardar(Docente objDocente);
 
+    public Docente consultarDocentePorId(int id);
+
     public List<Docente> listar();
 
 }
