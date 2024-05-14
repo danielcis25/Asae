@@ -12,6 +12,7 @@ import lombok.ToString;
 @Data
 @ToString
 @AllArgsConstructor
+
 public class Docente extends Persona{
     private String correo;
     private String vinculacion;

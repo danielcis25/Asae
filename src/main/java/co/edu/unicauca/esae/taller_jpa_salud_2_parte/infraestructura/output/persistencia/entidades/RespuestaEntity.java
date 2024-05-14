@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "Respuesta")
 public class RespuestaEntity {
 
@@ -30,4 +29,9 @@ public class RespuestaEntity {
     @ManyToOne
     @JoinColumn(name = "idDocente")
     private DocenteEntity objDocente;
+
+    public RespuestaEntity() {
+
+    }
 }
+

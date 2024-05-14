@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "Departamentos")
 public class DepartamentoEntity {
     @Id
@@ -22,4 +21,11 @@ public class DepartamentoEntity {
     @Column( nullable = false, length = 30)
     private String descripcion;
 
+    public DepartamentoEntity() {
+    }
+
+    public DepartamentoEntity(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 }
