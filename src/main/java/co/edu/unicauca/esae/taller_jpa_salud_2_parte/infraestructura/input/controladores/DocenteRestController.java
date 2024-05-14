@@ -1,6 +1,8 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.controladores;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -26,25 +28,32 @@ public class DocenteRestController {
 
     private final GestionarDocenteCUIntPort objGestionarDocenteCUInt;
     private final DocenteMapperInfraestructuraDominio objMapeador;
+    private final ModelMapper modelMapper;
 
     @PostMapping("/docentes")
     public ResponseEntity<DocenteDTORespuesta> create(@RequestBody DocenteDTOPeticion objDocente) {
-
         Docente objDocenteCrear = objMapeador.mappearDePeticionADocente(objDocente);
-
         Docente objDocenteCreado = objGestionarDocenteCUInt.registrarDocente(objDocenteCrear);
-
         ResponseEntity<DocenteDTORespuesta> objRespuesta = new ResponseEntity<DocenteDTORespuesta>(
                 objMapeador.mappearDeDocenteARespuesta(objDocenteCreado),
                 HttpStatus.CREATED);
         return objRespuesta;
     }
 
+
     @GetMapping("/docentes")
     public ResponseEntity<List<DocenteDTORespuesta>> listar() {
-        ResponseEntity<List<DocenteDTORespuesta>> objRespuesta = new ResponseEntity<List<DocenteDTORespuesta>>(
-                objMapeador.mappearDeDocentesARespuesta(this.objGestionarDocenteCUInt.listar()),
-                HttpStatus.OK);
+
+        Iterable<Docente> docentes = this.objGestionarDocenteCUInt.listar();
+        List<DocenteDTORespuesta> listDocentes = this.modelMapper.map(docentes,
+                new TypeToken<List<DocenteDTORespuesta>>() {
+                }.getType());
+
+        ResponseEntity<List<DocenteDTORespuesta>> objRespuesta = new ResponseEntity<List<DocenteDTORespuesta>>
+                (listDocentes,
+                        HttpStatus.OK
+                );
+
         return objRespuesta;
     }
 

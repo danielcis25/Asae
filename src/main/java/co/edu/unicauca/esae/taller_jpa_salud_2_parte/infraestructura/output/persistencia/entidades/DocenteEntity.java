@@ -3,6 +3,8 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.per
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,12 +37,12 @@ public class DocenteEntity extends PersonaEntity{
     @Column(nullable = false, length = 30)
     private String vinculacion;
 
+    @JsonManagedReference
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objDocente")
     private TelefonoEntity objTelefono;
 
     @OneToMany(mappedBy = "objDocente")
     private List<RespuestaEntity> listaRespuestas;
-
 
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name="DocenteDepartamento",
