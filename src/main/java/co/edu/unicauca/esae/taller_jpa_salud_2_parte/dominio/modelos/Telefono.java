@@ -11,7 +11,7 @@ public class Telefono {
     private int idtelefono;
     private String tipotelefono;
     private String numero;
-    //private Docente objDocente;
+    private Docente objDocente;
 
     public Telefono(Integer idtelefono, String tipotelefono, String numero) {
         this.idtelefono = idtelefono;

@@ -20,6 +20,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
     @Override
     public Docente mappearDePeticionADocente(DocenteDTOPeticion peticion) {
         Telefono objtelefono = new Telefono(
+                //peticion.getIdpersona(),
                 peticion.getObjTelefono().getIdtelefono(),
                 peticion.getObjTelefono().getNumero(),
                 peticion.getObjTelefono().getTipotelefono()
@@ -33,28 +34,28 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
             peticion.getCorreo(),
             peticion.getVinculacion(),
             objtelefono);
-        //objtelefono.setObjDocente(docente);
+        objtelefono.setObjDocente(docente);
         return docente;
     }
 
     @Override
     public DocenteDTORespuesta mappearDeDocenteARespuesta(Docente docente) {
 
-        TelefonoDTORespuesta objtelefono = new TelefonoDTORespuesta(
-            docente.getObjTelefono().getIdtelefono(),
-            docente.getObjTelefono().getNumero(),
-            docente.getObjTelefono().getTipotelefono()
-        );
-        DocenteDTORespuesta docenteMapeado = new DocenteDTORespuesta();
-        docenteMapeado.setNumeroIdentificacion(docente.getNumeroidentificacion());
-        docenteMapeado.setTipoIdentificacion(docente.getTipoidentificacion());
-        docenteMapeado.setNombres(docente.getNombres());
-        docenteMapeado.setApellidos(docente.getApellidos());
-        docenteMapeado.setCorreo(docente.getCorreo());
-        docenteMapeado.setVinculacion(docente.getVinculacion());
-        docenteMapeado.setObjTelefono(objtelefono);
-        return docenteMapeado;
-        //return null;
+        // TelefonoDTORespuesta objtelefono = new TelefonoDTORespuesta(
+        //     docente.getObjTelefono().getIdtelefono(),
+        //     docente.getObjTelefono().getNumero(),
+        //     docente.getObjTelefono().getTipotelefono()
+        // );
+        // DocenteDTORespuesta docenteMapeado = new DocenteDTORespuesta();
+        // docenteMapeado.setNumeroIdentificacion(docente.getNumeroidentificacion());
+        // docenteMapeado.setTipoIdentificacion(docente.getTipoidentificacion());
+        // docenteMapeado.setNombres(docente.getNombres());
+        // docenteMapeado.setApellidos(docente.getApellidos());
+        // docenteMapeado.setCorreo(docente.getCorreo());
+        // docenteMapeado.setVinculacion(docente.getVinculacion());
+        // docenteMapeado.setObjTelefono(objtelefono);
+        // return docenteMapeado;
+        return null;
     }
 
     @Override

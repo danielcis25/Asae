@@ -12,18 +12,18 @@ import lombok.ToString;
 @Data
 @ToString
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class Docente extends Persona{
     private String correo;
     private String vinculacion;
     private Telefono objTelefono;
     private List<Respuesta> listaRespuestas;
     private List<Departamento> listaDepartamentos;
-    public Docente(){
-        super();
-        this.listaDepartamentos = new ArrayList<>();
-        this.listaRespuestas = new ArrayList<>();
-    }
+    // public Docente(){
+    //     super();
+    //     this.listaDepartamentos = new ArrayList<>();
+    //     this.listaRespuestas = new ArrayList<>();
+    // }
 
     public Docente( String tipoIdentificacion, String numeroIdentificacion, String nombres,
                     String apellidos, String correo, String vinculacion, Telefono telefono) {

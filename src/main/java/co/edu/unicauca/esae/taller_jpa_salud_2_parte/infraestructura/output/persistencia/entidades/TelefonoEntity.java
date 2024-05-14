@@ -24,9 +24,14 @@ public class TelefonoEntity {
 
     @Column(nullable = false, length = 30)
     private String numero;
-
-    @JsonIgnore
-    @OneToOne
-    @JoinColumn(name="idDocente")
+    
+    // @JsonIgnore
+    // @OneToOne
+    // @JoinColumn(name="idDocente")
+    // private DocenteEntity objDocente;
+    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name="idpersona")
     private DocenteEntity objDocente;
+
 }

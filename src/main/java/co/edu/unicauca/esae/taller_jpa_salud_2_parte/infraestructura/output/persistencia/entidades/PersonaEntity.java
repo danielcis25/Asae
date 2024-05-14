@@ -12,15 +12,9 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Personas")
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class PersonaEntity {
-
-    public PersonaEntity(String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {
-        this.tipoidentificacion = tipoidentificacion;
-        this.numeroidentificacion = numeroidentificacion;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,5 +31,12 @@ public class PersonaEntity {
 
     @Column(nullable = false, length = 30)
     private String apellidos;
+
+    public PersonaEntity(String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {
+        this.tipoidentificacion = tipoidentificacion;
+        this.numeroidentificacion = numeroidentificacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+    }
 
 }

@@ -17,7 +17,8 @@ import javax.validation.constraints.Size;
 @Setter
 @Entity
 @AllArgsConstructor
-
+@ToString
+@NoArgsConstructor
 @Table(name = "Docentes")
 public class DocenteEntity extends PersonaEntity{
 
@@ -29,7 +30,12 @@ public class DocenteEntity extends PersonaEntity{
         this.listaRespuestas = listaRespuestas;
         this.listaDepartamentos = listaDepartamentos;
     }
-
+    //probar el otro constructor
+    // public DocenteEntity(String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos, String correo, String vinculacion) {
+    //     super( tipoIdentificacion, numeroIdentificacion, nombres, apellidos);
+    //     this.correo = correo;
+    //     this.vinculacion = vinculacion;
+    // }
     @Column(nullable = false, length = 30)
     private String correo;
 
@@ -37,7 +43,8 @@ public class DocenteEntity extends PersonaEntity{
     private String vinculacion;
 
     @JsonManagedReference
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objDocente")
+    //@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objDocente")
+    @OneToOne(mappedBy = "objDocente", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private TelefonoEntity objTelefono;
 
     @OneToMany(mappedBy = "objDocente")
@@ -50,8 +57,8 @@ public class DocenteEntity extends PersonaEntity{
     private List<DepartamentoEntity> listaDepartamentos;
 
 
-    public DocenteEntity(){
-        this.listaDepartamentos = new ArrayList<>();
-        this.listaRespuestas = new ArrayList<>();
-    }
+    // public DocenteEntity(){
+    //     this.listaDepartamentos = new ArrayList<>();
+    //     this.listaRespuestas = new ArrayList<>();
+    // }
 }
