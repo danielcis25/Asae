@@ -23,6 +23,6 @@ public class CuestionarioDTOPeticion {
     @NotNull(message = "{producto.codigo.emply}")
     @Size(min = 1, max = 100, message = "{producto.codigo.size}")
     private String descripcion;
-    private List<PreguntaDTOPeticion> preguntas;
+    //private List<PreguntaDTOPeticion> preguntas;
 
 }

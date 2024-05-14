@@ -26,7 +26,6 @@ public class DocenteEntity extends PersonaEntity{
         super( tipoIdentificacion, numeroIdentificacion, nombres, apellidos);
         this.correo = correo;
         this.vinculacion = vinculacion;
-        this.objTelefono = objTelefono;
         this.listaRespuestas = listaRespuestas;
         this.listaDepartamentos = listaDepartamentos;
     }

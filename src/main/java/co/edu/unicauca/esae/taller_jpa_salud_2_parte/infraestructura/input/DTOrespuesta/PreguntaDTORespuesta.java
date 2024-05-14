@@ -13,7 +13,7 @@ public class PreguntaDTORespuesta {
 
     private int idpregunta;
     private String enunciado;
-	private List<RespuestaDTORespuesta> listaRespuestas;
+	//private List<RespuestaDTORespuesta> listaRespuestas;
     private TipoPreguntaDTORespuesta objTipoPregunta;
     private CuestionarioDTORespuesta objCuestionario;
 

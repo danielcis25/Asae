@@ -8,14 +8,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class TelefonoDTORespuesta {
 
     private int idtelefono;
     private String tipotelefono;
     private String numero;
-    private DocenteDTORespuesta objDocente;
+    //private DocenteDTORespuesta objDocente;
 
 
     public TelefonoDTORespuesta(int idtelefono, String numero, String tipotelefono) {

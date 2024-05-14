@@ -31,7 +31,7 @@ public class CuestionarioMapperImpl implements CuestionarioMapperInfraestructura
         cuestionario.setTitulo(peticion.getTitulo());
         cuestionario.setDescripcion(peticion.getDescripcion());
         //como consulto la lista?
-        cuestionario.setPreguntas(this.mappearPeticionAPregunta());
+        //cuestionario.setPreguntas(this.mappearPeticionAPregunta());
 
         return cuestionario;
     }
@@ -44,7 +44,7 @@ public class CuestionarioMapperImpl implements CuestionarioMapperInfraestructura
         respuesta.setTitulo(cuestionario.getTitulo());
         respuesta.setDescripcion(cuestionario.getDescripcion());
 
-        respuesta.setPreguntas(this.mappearPreguntasARespuesta());
+        //respuesta.setPreguntas(this.mappearPreguntasARespuesta());
 
         return respuesta;
     }

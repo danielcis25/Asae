@@ -1,6 +1,5 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -26,7 +25,7 @@ public class TelefonoEntity {
     @Column(nullable = false, length = 30)
     private String numero;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name="idDocente")
     private DocenteEntity objDocente;

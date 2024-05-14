@@ -13,7 +13,7 @@ public class TipoPregunta {
     private int idtippregunta;
     private String nombre;
     private String descripcion;
-    private List<Pregunta> preguntas;
+    //private List<Pregunta> preguntas;
 
 
 }

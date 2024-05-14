@@ -13,7 +13,7 @@ public class RespuestaDTORespuesta {
     private int idrespuesta;
     private String descripcion;
     private PreguntaDTORespuesta objPregunta;
-    private DocenteDTORespuesta objDocente;
+    //private DocenteDTORespuesta objDocente;
 
     public RespuestaDTORespuesta(){
 

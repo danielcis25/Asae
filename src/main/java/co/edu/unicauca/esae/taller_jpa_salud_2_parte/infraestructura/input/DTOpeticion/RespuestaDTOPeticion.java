@@ -12,5 +12,5 @@ public class RespuestaDTOPeticion {
     private int idrespuesta;
     private String descripcion;
     private PreguntaDTOPeticion objPregunta;
-    private DocenteDTOPeticion objDocente;
+    //private DocenteDTOPeticion objDocente;
 }

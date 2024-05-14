@@ -12,12 +12,12 @@ public class Pregunta {
     
     private int idpregunta;
     private String enunciado;
-	private List<Respuesta> listaRespuestas;
+	//private List<Respuesta> listaRespuestas;
     private TipoPregunta objTipoPregunta;
     private Cuestionario objCuestionario;
 
     public Pregunta(){
-        this.listaRespuestas = new ArrayList<>();
+        //this.listaRespuestas = new ArrayList<>();
     }
 
 }

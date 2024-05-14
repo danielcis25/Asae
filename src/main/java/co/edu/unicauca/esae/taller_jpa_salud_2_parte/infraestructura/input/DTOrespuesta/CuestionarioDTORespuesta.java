@@ -13,7 +13,7 @@ public class CuestionarioDTORespuesta {
     private int idcuestionario;
     private String titulo;
     private String descripcion;
-    private List<PreguntaDTORespuesta> preguntas;
+    //private List<PreguntaDTORespuesta> preguntas;
 
     public CuestionarioDTORespuesta() {
     }

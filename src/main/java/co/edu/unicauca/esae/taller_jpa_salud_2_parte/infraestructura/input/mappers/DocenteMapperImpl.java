@@ -30,7 +30,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
             peticion.getCorreo(),
             peticion.getVinculacion(),
             objtelefono);
-            objtelefono.setObjDocente(docente);
+            //objtelefono.setObjDocente(docente);
         return docente;
         //throw new UnsupportedOperationException("Unimplemented method 'mappearDePeticionADocente'");
     }

@@ -15,6 +15,6 @@ public class TelefonoDTOPeticion {
     private String tipotelefono;
     @Pattern(regexp = "^3[0-9]{9}$", message = "El teléfono debe tener 10 números y comenzar con 3")
     private String numero;
-    private DocenteDTOPeticion objDocente;
+    //private DocenteDTOPeticion objDocente;
 
 }

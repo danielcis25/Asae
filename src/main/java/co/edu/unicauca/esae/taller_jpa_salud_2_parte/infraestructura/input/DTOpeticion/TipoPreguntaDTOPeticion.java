@@ -14,5 +14,5 @@ public class TipoPreguntaDTOPeticion {
     private int idtippregunta;
     private String nombre;
     private String descripcion;
-    private List<PreguntaDTOPeticion> preguntas;
+    //private List<PreguntaDTOPeticion> preguntas;
 }

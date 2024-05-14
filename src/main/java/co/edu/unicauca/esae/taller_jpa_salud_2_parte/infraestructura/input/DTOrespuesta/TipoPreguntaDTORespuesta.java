@@ -14,7 +14,7 @@ public class TipoPreguntaDTORespuesta {
     private int idtippregunta;
     private String nombre;
     private String descripcion;
-    private List<PreguntaDTORespuesta> preguntas;
+    //private List<PreguntaDTORespuesta> preguntas;
 
     public TipoPreguntaDTORespuesta(){
 
