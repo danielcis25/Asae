@@ -23,9 +23,9 @@ public class DocenteDTORespuesta {
     private String correo;
     private String vinculacion;
     private TelefonoDTORespuesta objTelefono;
-    @JsonIgnore
+    // @JsonIgnore
     private List<RespuestaDTORespuesta> listaRespuestas;
-    @JsonIgnore
+    // @JsonIgnore
     private List<DepartamentoDTORespuesta> listaDepartamentos;
 
     // public DocenteDTORespuesta(int idpersona, String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 public class TelefonoDTORespuesta {
 

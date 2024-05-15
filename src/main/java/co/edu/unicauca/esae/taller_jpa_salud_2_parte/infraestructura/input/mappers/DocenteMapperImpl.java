@@ -41,21 +41,21 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
     @Override
     public DocenteDTORespuesta mappearDeDocenteARespuesta(Docente docente) {
 
-        // TelefonoDTORespuesta objtelefono = new TelefonoDTORespuesta(
-        //     docente.getObjTelefono().getIdtelefono(),
-        //     docente.getObjTelefono().getNumero(),
-        //     docente.getObjTelefono().getTipotelefono()
-        // );
-        // DocenteDTORespuesta docenteMapeado = new DocenteDTORespuesta();
-        // docenteMapeado.setNumeroIdentificacion(docente.getNumeroidentificacion());
-        // docenteMapeado.setTipoIdentificacion(docente.getTipoidentificacion());
-        // docenteMapeado.setNombres(docente.getNombres());
-        // docenteMapeado.setApellidos(docente.getApellidos());
-        // docenteMapeado.setCorreo(docente.getCorreo());
-        // docenteMapeado.setVinculacion(docente.getVinculacion());
-        // docenteMapeado.setObjTelefono(objtelefono);
-        // return docenteMapeado;
-        return null;
+        TelefonoDTORespuesta objtelefono = new TelefonoDTORespuesta(
+            docente.getObjTelefono().getIdtelefono(),
+            docente.getObjTelefono().getNumero(),
+            docente.getObjTelefono().getTipotelefono()
+        );
+        DocenteDTORespuesta docenteMapeado = new DocenteDTORespuesta();
+        docenteMapeado.setNumeroIdentificacion(docente.getNumeroidentificacion());
+        docenteMapeado.setTipoIdentificacion(docente.getTipoidentificacion());
+        docenteMapeado.setNombres(docente.getNombres());
+        docenteMapeado.setApellidos(docente.getApellidos());
+        docenteMapeado.setCorreo(docente.getCorreo());
+        docenteMapeado.setVinculacion(docente.getVinculacion());
+        docenteMapeado.setObjTelefono(objtelefono);
+        return docenteMapeado;
+        //return null;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
 
             DocenteDTORespuesta docenteMapeado = new DocenteDTORespuesta();
             docenteMapeado.setIdPersona(docentePeticion.getIdpersona());
-            docenteMapeado.setTipoIdentificacion(docentePeticion.getNumeroidentificacion());
+            docenteMapeado.setTipoIdentificacion(docentePeticion.getTipoidentificacion());
             docenteMapeado.setNumeroIdentificacion(docentePeticion.getNumeroidentificacion());
             docenteMapeado.setNombres(docentePeticion.getNombres());
             docenteMapeado.setApellidos(docentePeticion.getApellidos());
