@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Telefono")
@@ -25,8 +24,8 @@ public class TelefonoEntity {
     @Column(nullable = false, length = 30)
     private String numero;
 
-    @JsonIgnore
+  
     @OneToOne
-    @JoinColumn(name="idDocente")
+    @JoinColumn(name="idpersona")
     private DocenteEntity objDocente;
 }

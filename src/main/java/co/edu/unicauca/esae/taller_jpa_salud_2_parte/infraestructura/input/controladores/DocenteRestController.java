@@ -24,12 +24,12 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api")
-@RequiredArgsConstructor
 @Validated  
+@RequiredArgsConstructor
+
 public class DocenteRestController {
 
     private final GestionarDocenteCUIntPort objGestionarDocenteCUInt;
-    private final DocenteMapperInfraestructuraDominio objMapeador;
     private final ModelMapper modelMapper;
 
     // @PostMapping("/docentes")

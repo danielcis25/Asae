@@ -15,9 +15,9 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
 @Entity
-@AllArgsConstructor
-
 @Table(name = "Docentes")
 public class DocenteEntity extends PersonaEntity{
 
@@ -26,9 +26,18 @@ public class DocenteEntity extends PersonaEntity{
         super( tipoIdentificacion, numeroIdentificacion, nombres, apellidos);
         this.correo = correo;
         this.vinculacion = vinculacion;
+        this.objTelefono = objTelefono;
         this.listaRespuestas = listaRespuestas;
         this.listaDepartamentos = listaDepartamentos;
     }
+    public DocenteEntity(String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos, String correo, String vinculacion,
+                         TelefonoEntity objTelefono) {
+        super( tipoIdentificacion, numeroIdentificacion, nombres, apellidos);
+        this.correo = correo;
+        this.vinculacion = vinculacion;
+        this.objTelefono = objTelefono;
+    }
+
 
     @Column(nullable = false, length = 30)
     private String correo;
@@ -38,6 +47,7 @@ public class DocenteEntity extends PersonaEntity{
 
     @JsonManagedReference
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "objDocente")
+    //@OneToOne(mappedBy = "objDocente", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private TelefonoEntity objTelefono;
 
     @OneToMany(mappedBy = "objDocente")
@@ -45,13 +55,13 @@ public class DocenteEntity extends PersonaEntity{
 
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name="DocenteDepartamento",
-                joinColumns = @JoinColumn(name="iddocente"),
+                joinColumns = @JoinColumn(name="idpersona"),
                 inverseJoinColumns = @JoinColumn(name="iddepartamento"))
     private List<DepartamentoEntity> listaDepartamentos;
 
 
-    public DocenteEntity(){
-        this.listaDepartamentos = new ArrayList<>();
-        this.listaRespuestas = new ArrayList<>();
-    }
+    // public DocenteEntity(){
+    //     this.listaDepartamentos = new ArrayList<>();
+    //     this.listaRespuestas = new ArrayList<>();
+    // }
 }

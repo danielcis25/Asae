@@ -33,7 +33,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
             peticion.getCorreo(),
             peticion.getVinculacion(),
             objtelefono);
-        //objtelefono.setObjDocente(docente);
+        objtelefono.setObjDocente(docente);
         return docente;
     }
 
@@ -66,7 +66,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
 
             DocenteDTORespuesta docenteMapeado = new DocenteDTORespuesta();
             docenteMapeado.setIdPersona(docentePeticion.getIdpersona());
-            docenteMapeado.setTipoIdentificacion(docentePeticion.getNumeroidentificacion());
+            docenteMapeado.setTipoIdentificacion(docentePeticion.getTipoidentificacion());
             docenteMapeado.setNumeroIdentificacion(docentePeticion.getNumeroidentificacion());
             docenteMapeado.setNombres(docentePeticion.getNombres());
             docenteMapeado.setApellidos(docentePeticion.getApellidos());

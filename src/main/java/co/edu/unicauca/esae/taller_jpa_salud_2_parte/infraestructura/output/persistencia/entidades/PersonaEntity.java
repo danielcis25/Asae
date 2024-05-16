@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Table(name = "Personas")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 public class PersonaEntity {
 
     public PersonaEntity(String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {
@@ -26,10 +27,10 @@ public class PersonaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idpersona;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = true, length = 30)
     private String tipoidentificacion;
 
-    @Column(unique = true, nullable = false, length = 30)
+    @Column(unique = true, nullable = true, length = 30)
     private String numeroidentificacion;
 
     @Column(nullable = false, length = 30)

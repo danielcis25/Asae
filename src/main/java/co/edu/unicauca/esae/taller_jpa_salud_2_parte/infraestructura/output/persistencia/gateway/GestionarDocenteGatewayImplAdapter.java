@@ -38,8 +38,9 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
         TelefonoEntity telefonoEntity = DocenteModelMapper.map(objDocente.getObjTelefono(),TelefonoEntity.class);
         DocenteEntity objDocenteEntity = DocenteModelMapper.map(objDocente, DocenteEntity.class);
 
-        telefonoEntity.setObjDocente(objDocenteEntity);
         objDocenteEntity.setObjTelefono(telefonoEntity);
+        telefonoEntity.setObjDocente(objDocenteEntity);
+        
 
         DocenteEntity objDocenteEntityCreado = this.objDocenteRepository.save(objDocenteEntity);
         

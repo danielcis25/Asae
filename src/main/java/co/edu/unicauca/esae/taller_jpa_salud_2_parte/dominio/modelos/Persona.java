@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Persona {
 
     private int idpersona;
@@ -22,7 +23,4 @@ public class Persona {
         this.apellidos = apellidos;
     }
 
-    public Persona() {
-
-    }
 }

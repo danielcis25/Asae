@@ -2,13 +2,13 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOr
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-//@AllArgsConstructor
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class TelefonoDTORespuesta {
 
@@ -18,6 +18,6 @@ public class TelefonoDTORespuesta {
     //private DocenteDTORespuesta objDocente;
 
 
-    public TelefonoDTORespuesta(int idtelefono, String numero, String tipotelefono) {
-    }
+    // public TelefonoDTORespuesta(int idtelefono, String numero, String tipotelefono) {
+    // }
 }
