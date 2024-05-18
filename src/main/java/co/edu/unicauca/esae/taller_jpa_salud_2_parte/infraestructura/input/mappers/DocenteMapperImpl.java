@@ -2,11 +2,12 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.mapp
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Departamento;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Telefono;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.DepartamentoDTORespuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.TelefonoDTORespuesta;
-import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Docente;
@@ -20,7 +21,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
     @Override
     public Docente mappearDePeticionADocente(DocenteDTOPeticion peticion) {
         Telefono objtelefono = new Telefono(
-                peticion.getObjTelefono().getIdtelefono(),
+                peticion.getIdpersona(),
                 peticion.getObjTelefono().getNumero(),
                 peticion.getObjTelefono().getTipotelefono()
         );
@@ -53,8 +54,23 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
         docenteMapeado.setCorreo(docente.getCorreo());
         docenteMapeado.setVinculacion(docente.getVinculacion());
         docenteMapeado.setObjTelefono(objtelefono);
+        List<DepartamentoDTORespuesta> departamentos = mappearDepartamentos(docente.getListaDepartamentos());
+        docenteMapeado.setListaDepartamentos(departamentos);
         return docenteMapeado;
         //return null;
+    }
+
+    private List<DepartamentoDTORespuesta> mappearDepartamentos(List<Departamento> departamentos) {
+        if (departamentos == null) {
+            return new ArrayList<>();
+        }
+        return departamentos.stream().map(departamento -> {
+            DepartamentoDTORespuesta dto = new DepartamentoDTORespuesta();
+            dto.setIddepartamento(departamento.getIddepartamento());
+            dto.setNombre(departamento.getNombre());
+            dto.setDescripcion(departamento.getDescripcion());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -74,7 +90,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
             docenteMapeado.setVinculacion(docentePeticion.getVinculacion());
 
             TelefonoDTORespuesta telefonoMapeado = new TelefonoDTORespuesta();
-            telefonoMapeado.setIdtelefono(docentePeticion.getObjTelefono().getIdtelefono());
+            telefonoMapeado.setIdtelefono(docentePeticion.getIdpersona());
             telefonoMapeado.setNumero(docentePeticion.getObjTelefono().getNumero()); 
             telefonoMapeado.setTipotelefono(docentePeticion.getObjTelefono().getTipotelefono());
             docenteMapeado.setObjTelefono(telefonoMapeado);
@@ -83,15 +99,21 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
         return response;
 }
 
-
     @Override
     public List<Docente> mappearRespuestaADocente(List<DocenteDTOPeticion> docentes) {
         List<Docente> response = new ArrayList<>();
         for(DocenteDTOPeticion docentePeticion : docentes){
             Docente docenteMapeado = this.mappearDePeticionADocente(docentePeticion);
+            response.add(docenteMapeado);
+        }
+        return response;
+    }
 
-
-
+    @Override
+    public List<Docente> mappearDepartamentoADocente(List<DocenteDTOPeticion> docentes) {
+        List<Docente> response = new ArrayList<>();
+        for(DocenteDTOPeticion docentePeticion : docentes){
+            Docente docenteMapeado = this.mappearDePeticionADocente(docentePeticion);
             response.add(docenteMapeado);
         }
         return response;

@@ -40,6 +40,8 @@ public class DocenteDTOPeticion{
     
     //la notacion va solo en el telefonoDTO o en cada dto que lo use?
     //@Pattern(regexp = "^3[0-9]{9}$", message = "El teléfono debe tener 10 números y comenzar con 3")
+    //probar
+    @NotNull(message = "{docente.telefono.notnull}")
     private TelefonoDTOPeticion objTelefono;
     private List<RespuestaDTOPeticion> listaRespuestas;
     private List<DepartamentoDTOPeticion> listaDepartamentos;

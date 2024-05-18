@@ -13,6 +13,7 @@ import lombok.Setter;
 // @NoArgsConstructor
 public class TelefonoDTOPeticion {
     //TODO: notaciones
+    //@Nullable
     private int idtelefono;
     private String tipotelefono;
     //@Pattern(regexp = "^3[0-9]{9}$", message = "El teléfono debe tener 10 números y comenzar con 3")

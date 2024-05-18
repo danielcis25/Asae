@@ -2,6 +2,9 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.per
 
 import java.util.List;
 
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Departamento;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.DepartamentoEntity;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.DepartamentoRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
@@ -17,11 +20,14 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
 
     private final ModelMapper DocenteModelMapper;
     private final DocenteRepository objDocenteRepository;
+    private final DepartamentoRepository objDepartamentoRepository;
 
     public GestionarDocenteGatewayImplAdapter( DocenteRepository objDocenteRepository,
-                                               ModelMapper DocenteModelMapper
+                                               ModelMapper DocenteModelMapper,
+                                                  DepartamentoRepository objDepartamentoRepository
                                               ){
         this.objDocenteRepository = objDocenteRepository;
+        this.objDepartamentoRepository = objDepartamentoRepository;
         this.DocenteModelMapper = DocenteModelMapper;
     }
 
@@ -54,6 +60,16 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
         List<Docente> listaObtenida = this.DocenteModelMapper.map(lista, new TypeToken<List<Docente>>() {
         }.getType());
         return listaObtenida;
+    }
+
+    @Override
+    public Departamento consultarDepartamentoPorId(int idDepartamento) {
+        return this.DocenteModelMapper.map(this.objDepartamentoRepository.findById(idDepartamento), Departamento.class);
+    }
+
+    @Override
+    public Departamento guardarDepartamento(Departamento objDepartamento) {
+        return this.DocenteModelMapper.map(this.objDepartamentoRepository.save(this.DocenteModelMapper.map(objDepartamento, DepartamentoEntity.class)), Departamento.class);
     }
 
     @Override

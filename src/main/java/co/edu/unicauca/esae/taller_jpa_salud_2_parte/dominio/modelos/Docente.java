@@ -22,6 +22,7 @@ public class Docente extends Persona{
     private Telefono objTelefono;
     private List<Respuesta> listaRespuestas;
     private List<Departamento> listaDepartamentos;
+
     // public Docente(){
     //     super();
     //     this.listaDepartamentos = new ArrayList<>();

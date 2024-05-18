@@ -3,12 +3,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Departamentos")
 public class DepartamentoEntity {
     @Id
@@ -21,8 +23,11 @@ public class DepartamentoEntity {
     @Column( nullable = false, length = 30)
     private String descripcion;
 
-    public DepartamentoEntity() {
-    }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "DocenteEntityDepartamento", joinColumns = @JoinColumn(name="iddepartamento"),
+            inverseJoinColumns = @JoinColumn(name = "iddocente"))
+    private List<DocenteEntity> docentes;
+
 
     public DepartamentoEntity(String nombre, String descripcion) {
         this.nombre = nombre;

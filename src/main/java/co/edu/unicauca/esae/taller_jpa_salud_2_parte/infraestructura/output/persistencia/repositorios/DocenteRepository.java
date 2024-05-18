@@ -15,6 +15,8 @@ public interface DocenteRepository extends JpaRepository<DocenteEntity,Integer> 
 
     DocenteEntity findById(int idpersona);
 
+
+
     //
 }
 

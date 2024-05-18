@@ -21,6 +21,7 @@ public class DocenteDTORespuesta {
     private String correo;
     private String vinculacion;
     private TelefonoDTORespuesta objTelefono;
+    //JSONIgnore
     private List<RespuestaDTORespuesta> listaRespuestas;
     private List<DepartamentoDTORespuesta> listaDepartamentos;
 
