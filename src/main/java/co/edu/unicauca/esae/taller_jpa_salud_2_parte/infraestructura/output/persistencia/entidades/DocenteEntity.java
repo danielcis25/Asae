@@ -30,6 +30,8 @@ public class DocenteEntity extends PersonaEntity{
         this.listaDepartamentos = listaDepartamentos;
     }
 
+
+
     @Column(nullable = false, length = 30)
     private String correo;
 

@@ -18,6 +18,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
     @Override
     public Docente mappearDePeticionADocente(DocenteDTOPeticion peticion) {
         Telefono objtelefono = new Telefono(
+                peticion.getIdpersona(),
                 peticion.getObjTelefono().getIdtelefono(),
                 peticion.getObjTelefono().getNumero(),
                 peticion.getObjTelefono().getTipotelefono()
@@ -30,7 +31,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
             peticion.getCorreo(),
             peticion.getVinculacion(),
             objtelefono);
-            //objtelefono.setObjDocente(docente);
+            objtelefono.setObjDocente(docente);
         return docente;
         //throw new UnsupportedOperationException("Unimplemented method 'mappearDePeticionADocente'");
     }

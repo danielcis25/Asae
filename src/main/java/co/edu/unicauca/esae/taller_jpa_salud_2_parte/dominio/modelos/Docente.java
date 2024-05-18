@@ -30,6 +30,7 @@ public class Docente extends Persona{
         super( tipoIdentificacion, numeroIdentificacion, nombres, apellidos);
         this.correo = correo;
         this.vinculacion = vinculacion;
+        this.objTelefono = telefono;
     }
 
 

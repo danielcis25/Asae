@@ -9,11 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Telefono {
     private int idtelefono;
+    private Integer idPersona;
     private String tipotelefono;
     private String numero;
-    //private Docente objDocente;
+    private Docente objDocente;
 
-    public Telefono(Integer idtelefono, String tipotelefono, String numero) {
+    public Telefono(Integer idPersona, Integer idtelefono, String tipotelefono, String numero) {
+        this.idPersona = idPersona;
         this.idtelefono = idtelefono;
         this.tipotelefono = tipotelefono;
         this.numero = numero;
