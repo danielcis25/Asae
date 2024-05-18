@@ -15,14 +15,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CuestionarioDTOPeticion {
-    //TODO:notaciones
+
     private int idcuestionario;
-    @NotNull(message = "{producto.codigo.emply}")
+
+    @NotNull(message = "{CuestionarioDTOPeticion.titulo.emply}")
     @Size(min = 3, max = 20, message = "{producto.codigo.size}")
     private String titulo;
-    @NotNull(message = "{producto.codigo.emply}")
-    @Size(min = 1, max = 100, message = "{producto.codigo.size}")
+
+    @NotNull(message = "{CuestionarioDTOPeticion.descripcion.emply}")
+    @Size(min = 1, max = 100, message = "{CuestionarioDTOPeticion.descripcion.size}")
     private String descripcion;
-    //private List<PreguntaDTOPeticion> preguntas;
+    
+    private List<PreguntaDTOPeticion> preguntas;
 
 }

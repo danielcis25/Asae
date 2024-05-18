@@ -24,11 +24,4 @@ public class DocenteDTORespuesta {
     private List<RespuestaDTORespuesta> listaRespuestas;
     private List<DepartamentoDTORespuesta> listaDepartamentos;
 
-    // public DocenteDTORespuesta(int idpersona, String tipoidentificacion, String numeroidentificacion, String nombres, String apellidos) {
-    //     super(idpersona, tipoidentificacion, numeroidentificacion, nombres, apellidos);
-    // }
-
-    // public DocenteDTORespuesta() {
-
-    // }
 }

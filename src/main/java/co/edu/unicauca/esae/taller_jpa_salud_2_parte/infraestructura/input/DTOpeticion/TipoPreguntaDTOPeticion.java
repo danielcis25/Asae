@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class TipoPreguntaDTOPeticion {
-    //TODO: agregar notaciones
+
     private int idtippregunta;
     private String nombre;
     private String descripcion;

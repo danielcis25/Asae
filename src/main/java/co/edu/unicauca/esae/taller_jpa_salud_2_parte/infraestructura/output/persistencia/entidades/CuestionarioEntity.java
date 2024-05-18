@@ -9,6 +9,7 @@ import lombok.*;
 @Entity
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Cuestionarios")
 
 public class CuestionarioEntity {
@@ -16,8 +17,6 @@ public class CuestionarioEntity {
     public CuestionarioEntity(String titulo, String descripcion) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-    }
-    public CuestionarioEntity() {
     }
 
     @Id

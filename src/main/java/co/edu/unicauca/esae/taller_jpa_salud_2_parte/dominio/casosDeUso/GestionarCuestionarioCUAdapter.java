@@ -29,7 +29,7 @@ public class GestionarCuestionarioCUAdapter implements GestionarCuestionarioCUIn
             this.objCuestionarioFormateadorResultados.retornarRespuestaErrorEntidadExiste("Error, se encuentra en el sistema un Cuestionario con el titulo ingresado ");
         }else{
             //preguntar si se pasa titulo? o todos los atributos o el objCuestionario
-            cuestionario.setTitulo(cuestionario.getTitulo());
+            //cuestionario.setTitulo(cuestionario.getTitulo());
             objCuestionarioCreado = this.objGestionarCuestionarioGateway.guardarCuestionario(cuestionario);
         }
         return objCuestionarioCreado;

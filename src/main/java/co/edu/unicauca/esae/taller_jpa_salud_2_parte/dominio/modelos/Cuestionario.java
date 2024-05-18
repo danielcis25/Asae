@@ -14,5 +14,5 @@ public class Cuestionario {
     private int idcuestionario;
     private String titulo;
     private String descripcion;
-    //private List<Pregunta> preguntas;
+    private List<Pregunta> preguntas;
 }

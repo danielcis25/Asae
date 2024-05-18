@@ -1,6 +1,7 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.gateway;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.CuestionarioDTORespuesta;
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.GestionarCuestionarioGatewayIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.CuestionarioEntity;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.PreguntaEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.CuestionarioRepository;
 @Service
 public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestionarioGatewayIntPort {
@@ -22,7 +24,7 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
         this.CuestionarioModelMapper = CuestionarioModelMapper;
     }
 
-    //
+    
     @Override
     public boolean existeCuestionarioPorTitulo(String titulo) {
         return this.objCuestionarioRepository.existeCuestionarioPorTitulo(titulo) == 1;
@@ -31,11 +33,30 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
     //
     @Override
     public Cuestionario guardarCuestionario(Cuestionario objCuestionario) {
+        // Mapeo de las preguntas asociadas
         CuestionarioEntity objCuestionarioEntity = this.CuestionarioModelMapper.map(objCuestionario, CuestionarioEntity.class);
+        List<PreguntaEntity> objPreguntaEntity = objCuestionario.getPreguntas().stream()
+            .map(pregunta -> {
+                PreguntaEntity preguntaEntity = CuestionarioModelMapper.map(pregunta, PreguntaEntity.class);
+                // Establecer la relación con el cuestionario
+                preguntaEntity.setObjCuestionario(objCuestionarioEntity);
+                return preguntaEntity;
+            })
+            .collect(Collectors.toList());
+
+        // Asignar las preguntas al cuestionario
+        // objCuestionario.setPreguntas(objPreguntaEntity.stream()
+        // .map(CuestionarioModelMapper::mapToDomain) // Mapear de vuelta a entidades de dominio
+        // .collect(Collectors.toList()));
+        objCuestionarioEntity.setPreguntas(objPreguntaEntity);
+
+        //PreguntaEntity objPreguntaEntity = this.CuestionarioModelMapper(objCuestionario.getPreguntas(),PreguntaEntity.class);
+       
         CuestionarioEntity objCuestionarioEntityCreado = this.objCuestionarioRepository.save(objCuestionarioEntity);
         Cuestionario objCuestionarioRespuesta = this.CuestionarioModelMapper.map(objCuestionarioEntityCreado, Cuestionario.class);
         return objCuestionarioRespuesta;
     }
+
 
     @Override
     public List<Cuestionario> listarCuestionarios() {

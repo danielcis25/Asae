@@ -17,17 +17,22 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DocenteDTOPeticion{
-    //TODO: notaciones
+
     private Integer idpersona;
+
     private String tipoidentificacion;
+
     // @Size(min=5, max = 11, message="{docente.longitud.numeroidenticacion}")
     private String numeroidentificacion;
+
     @NotNull(message = "{producto.codigo.emply}")
     @Size(min = 1, max = 30, message = "{producto.codigo.size}")
     private String nombres;
+
     @NotNull(message = "{producto.codigo.emply}")
     @Size(min = 1, max = 30, message = "{producto.codigo.size}")
     private String apellidos;
+    
     //---
     //@Email(message = "El correo electrónico debe tener un formato válido")
     private String correo;

@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Preguntas")
 public class PreguntaEntity {
     @Id
@@ -33,8 +34,8 @@ public class PreguntaEntity {
     @JoinColumn(name = "idCuestionario", nullable = false)
     private CuestionarioEntity objCuestionario;
 
-    public PreguntaEntity(){
-        this.listaRespuestas = new ArrayList<>();
-    }
+    // public PreguntaEntity(){
+    //     this.listaRespuestas = new ArrayList<>();
+    // }
 
 }

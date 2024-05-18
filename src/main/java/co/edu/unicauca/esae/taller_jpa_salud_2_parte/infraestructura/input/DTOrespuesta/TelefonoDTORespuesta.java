@@ -18,6 +18,4 @@ public class TelefonoDTORespuesta {
     //private DocenteDTORespuesta objDocente;
 
 
-    // public TelefonoDTORespuesta(int idtelefono, String numero, String tipotelefono) {
-    // }
 }

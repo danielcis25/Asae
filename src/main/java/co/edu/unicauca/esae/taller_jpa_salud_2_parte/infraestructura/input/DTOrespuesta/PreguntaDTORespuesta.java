@@ -4,21 +4,20 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class PreguntaDTORespuesta {
 
     private int idpregunta;
     private String enunciado;
 	//private List<RespuestaDTORespuesta> listaRespuestas;
     private TipoPreguntaDTORespuesta objTipoPregunta;
-    private CuestionarioDTORespuesta objCuestionario;
+    //private CuestionarioDTORespuesta objCuestionario;
 
-    public PreguntaDTORespuesta(){
-
-    }
 
 }
