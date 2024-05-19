@@ -26,7 +26,7 @@ public class PreguntaEntity {
     @OneToMany(mappedBy = "objPregunta", fetch = FetchType.EAGER)
     private List<RespuestaEntity> listaRespuestas;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()//fetch = FetchType.EAGER)
     @JoinColumn(name = "idTipoPregunta", nullable = false)
     private TipoPreguntaEntity objTipoPregunta;
 

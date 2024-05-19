@@ -11,17 +11,21 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.Gestionar
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.CuestionarioEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.PreguntaEntity;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.TipoPreguntaEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.CuestionarioRepository;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.TipoPreguntasRepository;
 @Service
 public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestionarioGatewayIntPort {
 
     private final CuestionarioRepository objCuestionarioRepository;
     private final ModelMapper CuestionarioModelMapper;
+    private final TipoPreguntasRepository tipoPreguntaRepository;
 
     public GestionarCuestionarioGatewayImplAdapter(CuestionarioRepository objCuestionarioRepository,
-                                                   ModelMapper CuestionarioModelMapper){
+                                                   ModelMapper CuestionarioModelMapper,TipoPreguntasRepository tipoPreguntaRepository){
         this.objCuestionarioRepository = objCuestionarioRepository;
         this.CuestionarioModelMapper = CuestionarioModelMapper;
+        this.tipoPreguntaRepository = tipoPreguntaRepository;
     }
 
     
@@ -38,6 +42,13 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
         List<PreguntaEntity> objPreguntaEntity = objCuestionario.getPreguntas().stream()
             .map(pregunta -> {
                 PreguntaEntity preguntaEntity = CuestionarioModelMapper.map(pregunta, PreguntaEntity.class);
+                //==========
+                // Buscar y asignar TipoPreguntaEntity existente revisar por que no esta haciendo la relacion
+                TipoPreguntaEntity tipoPreguntaEntity = tipoPreguntaRepository.findById(pregunta.getObjTipoPregunta().getIdTipoPregunta())
+                        .orElseThrow(() -> new IllegalArgumentException("TipoPreguntaEntity no encontrada con ID: " + pregunta.getObjTipoPregunta().getIdTipoPregunta()));
+                
+                preguntaEntity.setObjTipoPregunta(tipoPreguntaEntity);
+                //========
                 // Establecer la relación con el cuestionario
                 preguntaEntity.setObjCuestionario(objCuestionarioEntity);
                 return preguntaEntity;
@@ -49,7 +60,8 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
         // .map(CuestionarioModelMapper::mapToDomain) // Mapear de vuelta a entidades de dominio
         // .collect(Collectors.toList()));
         objCuestionarioEntity.setPreguntas(objPreguntaEntity);
-
+        //revisar va o no
+        //objPreguntaEntity.forEach(pregunta -> pregunta.setObjCuestionario(objCuestionarioEntity));
         //PreguntaEntity objPreguntaEntity = this.CuestionarioModelMapper(objCuestionario.getPreguntas(),PreguntaEntity.class);
        
         CuestionarioEntity objCuestionarioEntityCreado = this.objCuestionarioRepository.save(objCuestionarioEntity);

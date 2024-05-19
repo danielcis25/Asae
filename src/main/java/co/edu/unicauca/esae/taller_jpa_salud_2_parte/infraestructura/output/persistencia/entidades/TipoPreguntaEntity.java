@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 public class TipoPreguntaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idtippregunta;
+    private int idTipoPregunta;
 
     @Column(nullable = false, length = 30)
     private String nombre;

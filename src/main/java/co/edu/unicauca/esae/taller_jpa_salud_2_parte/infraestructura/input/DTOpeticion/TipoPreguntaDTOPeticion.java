@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TipoPreguntaDTOPeticion {
 
-    private int idtippregunta;
+    private int idTipoPregunta;
     private String nombre;
     private String descripcion;
     //private List<PreguntaDTOPeticion> preguntas;

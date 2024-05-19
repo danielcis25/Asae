@@ -80,7 +80,7 @@ public class CuestionarioMapperImpl implements CuestionarioMapperInfraestructura
     @Override
     public PreguntaDTORespuesta mappearPreguntaARespuesta(Pregunta pregunta) {
         TipoPreguntaDTORespuesta tipoPreguntaRespuesta = new TipoPreguntaDTORespuesta(
-            pregunta.getObjTipoPregunta().getIdtippregunta(),
+            pregunta.getObjTipoPregunta().getIdTipoPregunta(),
             pregunta.getObjTipoPregunta().getNombre(),
             pregunta.getObjTipoPregunta().getDescripcion()
         );
@@ -95,7 +95,7 @@ public class CuestionarioMapperImpl implements CuestionarioMapperInfraestructura
     @Override
     public Pregunta mappearPeticionAPregunta(PreguntaDTOPeticion peticion) {
         TipoPregunta tipoPregunta = new TipoPregunta(
-            peticion.getObjTipoPregunta().getIdtippregunta(),
+            peticion.getObjTipoPregunta().getIdTipoPregunta(),
             peticion.getObjTipoPregunta().getNombre(),
             peticion.getObjTipoPregunta().getDescripcion()
         );
