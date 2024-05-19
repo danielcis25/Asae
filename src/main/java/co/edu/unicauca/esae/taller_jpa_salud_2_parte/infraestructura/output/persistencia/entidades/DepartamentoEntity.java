@@ -23,11 +23,12 @@ public class DepartamentoEntity {
     @Column( nullable = false, length = 30)
     private String descripcion;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "DocenteEntityDepartamento", joinColumns = @JoinColumn(name="iddepartamento"),
+    /*@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "DocenteDepartamento",
+            joinColumns = @JoinColumn(name="iddepartamento"),
             inverseJoinColumns = @JoinColumn(name = "iddocente"))
     private List<DocenteEntity> docentes;
-
+    */
 
     public DepartamentoEntity(String nombre, String descripcion) {
         this.nombre = nombre;

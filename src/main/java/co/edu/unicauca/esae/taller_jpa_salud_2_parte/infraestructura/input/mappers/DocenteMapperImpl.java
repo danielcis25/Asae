@@ -46,6 +46,7 @@ public class DocenteMapperImpl implements DocenteMapperInfraestructuraDominio{
             docente.getObjTelefono().getNumero(),
             docente.getObjTelefono().getTipotelefono()
         );
+
         DocenteDTORespuesta docenteMapeado = new DocenteDTORespuesta();
         docenteMapeado.setNumeroIdentificacion(docente.getNumeroidentificacion());
         docenteMapeado.setTipoIdentificacion(docente.getTipoidentificacion());

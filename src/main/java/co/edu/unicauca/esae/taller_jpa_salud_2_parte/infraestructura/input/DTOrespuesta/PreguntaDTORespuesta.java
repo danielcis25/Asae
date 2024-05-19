@@ -15,9 +15,14 @@ public class PreguntaDTORespuesta {
 
     private int idpregunta;
     private String enunciado;
-	//private List<RespuestaDTORespuesta> listaRespuestas;
+	private List<RespuestaDTORespuesta> listaRespuestas;
     private TipoPreguntaDTORespuesta objTipoPregunta;
     //private CuestionarioDTORespuesta objCuestionario;
 
+    public PreguntaDTORespuesta(int idpregunta, String enunciado, TipoPreguntaDTORespuesta objTipoPregunta) {
+        this.idpregunta = idpregunta;
+        this.enunciado = enunciado;
+        this.objTipoPregunta = objTipoPregunta;
+    }
 
 }

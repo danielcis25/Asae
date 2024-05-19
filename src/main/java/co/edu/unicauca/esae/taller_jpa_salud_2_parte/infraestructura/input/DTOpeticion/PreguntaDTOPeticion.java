@@ -21,7 +21,7 @@ public class PreguntaDTOPeticion {
     @NotNull(message = "{PreguntaDTOPeticion.enunciado.emply}")
     private String enunciado;
 
-	//private List<RespuestaDTOPeticion> listaRespuestas;
+	private List<RespuestaDTOPeticion> listaRespuestas;
     private TipoPreguntaDTOPeticion objTipoPregunta;
     private CuestionarioDTOPeticion objCuestionario;
 }

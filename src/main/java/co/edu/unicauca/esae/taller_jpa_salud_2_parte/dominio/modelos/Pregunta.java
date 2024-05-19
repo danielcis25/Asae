@@ -14,8 +14,21 @@ public class Pregunta {
     
     private int idpregunta;
     private String enunciado;
-	//private List<Respuesta> listaRespuestas;
+	private List<Respuesta> listaRespuestas;
     private TipoPregunta objTipoPregunta;
     private Cuestionario objCuestionario;
 
+    public Pregunta(String enunciado, TipoPregunta objTipoPregunta, Cuestionario objCuestionario) {
+        this.enunciado = enunciado;
+        this.objTipoPregunta = objTipoPregunta;
+        this.objCuestionario = objCuestionario;
+    }
+
+    public Pregunta(int idpregunta, String enunciado, TipoPregunta tipoPregunta, Object respuestas) {
+        this.enunciado = enunciado;
+        this.objTipoPregunta = tipoPregunta;
+        this.setIdpregunta(idpregunta);
+        this.listaRespuestas = respuestas == null ? new ArrayList<>() : (List<Respuesta>) respuestas;
+
+    }
 }

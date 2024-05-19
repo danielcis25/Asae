@@ -55,7 +55,7 @@ public class DocenteEntity extends PersonaEntity{
 
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name="DocenteDepartamento",
-                joinColumns = @JoinColumn(name="idpersona"),
+                joinColumns = @JoinColumn(name="iddocente"),
                 inverseJoinColumns = @JoinColumn(name="iddepartamento"))
     private List<DepartamentoEntity> listaDepartamentos;
 
