@@ -50,6 +50,13 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
         // .collect(Collectors.toList()));
         objCuestionarioEntity.setPreguntas(objPreguntaEntity);
 
+        System.out.println("---------------------CuestionarioEntity: " + objCuestionarioEntity.toString());
+        System.out.println("que tiene: " + objCuestionarioEntity.getTitulo());
+        System.out.println("que tiene: " + objCuestionarioEntity.getDescripcion());
+        System.out.println("que tiene: " + objCuestionarioEntity.getPreguntas().get(0).getEnunciado());
+        System.out.println("que tiene: " + objCuestionarioEntity.getPreguntas().get(0).getObjTipoPregunta().getNombre());
+
+
         //PreguntaEntity objPreguntaEntity = this.CuestionarioModelMapper(objCuestionario.getPreguntas(),PreguntaEntity.class);
        
         CuestionarioEntity objCuestionarioEntityCreado = this.objCuestionarioRepository.save(objCuestionarioEntity);

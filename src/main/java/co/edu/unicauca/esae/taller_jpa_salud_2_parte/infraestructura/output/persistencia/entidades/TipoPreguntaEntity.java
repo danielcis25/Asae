@@ -27,7 +27,7 @@ public class TipoPreguntaEntity {
     @Column(nullable = false, length = 30)
     private String descripcion;
 
-    // @OneToMany(mappedBy = "objTipoPregunta")
-    // private List<PreguntaEntity> preguntas;
+     @OneToMany(mappedBy = "objTipoPregunta")
+     private List<PreguntaEntity> preguntas;
 }
 

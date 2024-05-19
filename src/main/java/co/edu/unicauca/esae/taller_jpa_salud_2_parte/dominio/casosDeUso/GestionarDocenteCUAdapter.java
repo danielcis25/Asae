@@ -56,7 +56,7 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
                 Docente docente = objDocente;
 
                 departamento.getDocentes().add(docente);
-                System.out.println(departamento.getDocentes().get(0).getIdpersona());
+                System.out.println("departamento:"+departamento.getDocentes().get(0).getIdpersona());
 
 
                 return this.objGestionarDocenteGateway.guardarDepartamento(departamento);
