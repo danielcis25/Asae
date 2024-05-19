@@ -23,9 +23,9 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
     @Override
     public Docente registrarDocente(Docente objDocente) {
        Docente objDocenteCreado = null;
-       if (this.objGestionarDocenteGateway.existeDocentePorId(objDocente.getIdpersona())) {
+       if (this.objGestionarDocenteGateway.existeDocentePorCorreo(objDocente.getCorreo())) {
             this.objCuestionarioFormateadorResultados.
-                    retornarRespuestaErrorEntidadExiste("Error. Ya existe un docente con ese ID ");
+                    retornarRespuestaErrorEntidadExiste("Error. Ya existe un docente con ese correo ");
        }else{
         objDocenteCreado = this.objGestionarDocenteGateway.guardar(objDocente);
        }
@@ -46,9 +46,9 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
     public Departamento asignarDepartamentoDocente(int idDepartamento, Docente objDocente) {
 
         //existe departamento y el docente ?
-        if(this.objGestionarDocenteGateway.existeDocentePorId(objDocente.getIdpersona())){
+        if(this.objGestionarDocenteGateway.existeDocentePorCorreo(objDocente.getCorreo())){
 
-                System.out.println("#Existe publicaicon y autores");
+
                 //obtener publicaicon y docente y agregarlo a la lista de autores
                 Departamento departamento = this.objGestionarDocenteGateway.consultarDepartamentoPorId(idDepartamento);
                 System.out.println("Departamento ES: "+ departamento.toString());
@@ -56,7 +56,7 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
                 Docente docente = objDocente;
 
                 departamento.getDocentes().add(docente);
-                System.out.println(departamento.getDocentes().get(0).getIdpersona());
+                System.out.println("departamento:"+departamento.getDocentes().get(0).getIdpersona());
 
 
                 return this.objGestionarDocenteGateway.guardarDepartamento(departamento);

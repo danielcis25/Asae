@@ -8,13 +8,16 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.pers
 import org.springframework.data.repository.query.Param;
 
 public interface DocenteRepository extends JpaRepository<DocenteEntity,Integer> {
-    @Query("SELECT COUNT(d) > 0 FROM DocenteEntity d WHERE d.idpersona = :idpersona")
-    //@Query("SELECT COUNT(d) > 0 FROM DocenteEntity d WHERE LOWER(CAST(d.idpersona AS string)) = LOWER(:idpersona)")
+    // @Query("SELECT COUNT(d) > 0 FROM DocenteEntity d WHERE d.idpersona = :idpersona")
+    // //@Query("SELECT COUNT(d) > 0 FROM DocenteEntity d WHERE LOWER(CAST(d.idpersona AS string)) = LOWER(:idpersona)")
+    // boolean existsByID(@Param("idpersona") String idpersona);
 
-    boolean existsByID(@Param("idpersona") String idpersona);
+    // DocenteEntity findById(int idpersona);
 
-    DocenteEntity findById(int idpersona);
+    @Query("SELECT COUNT(d) > 0 FROM DocenteEntity d WHERE LOWER(d.correo) = LOWER(:correo)")
+    boolean existsByCorreo(@Param("correo") String correo);
 
+    DocenteEntity findByCorreo(String correo);
 
 
     //

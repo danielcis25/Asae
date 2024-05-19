@@ -24,10 +24,10 @@ public class PreguntaEntity {
     private String enunciado;
 
     @OneToMany(mappedBy = "objPregunta", fetch = FetchType.EAGER)
-    private List<RespuestaEntity> listaRespuestas;
+	private List<RespuestaEntity> listaRespuestas;
 
-    @ManyToOne()//fetch = FetchType.EAGER)
-    @JoinColumn(name = "idTipoPregunta", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idtippregunta", nullable = false)
     private TipoPreguntaEntity objTipoPregunta;
 
     @ManyToOne

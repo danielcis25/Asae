@@ -79,6 +79,7 @@ public class CuestionarioMapperImpl implements CuestionarioMapperInfraestructura
     //Cambio, metodos nuevos
     @Override
     public PreguntaDTORespuesta mappearPreguntaARespuesta(Pregunta pregunta) {
+
         TipoPreguntaDTORespuesta tipoPreguntaRespuesta = new TipoPreguntaDTORespuesta(
             pregunta.getObjTipoPregunta().getIdTipoPregunta(),
             pregunta.getObjTipoPregunta().getNombre(),
@@ -112,7 +113,7 @@ public class CuestionarioMapperImpl implements CuestionarioMapperInfraestructura
             peticion.getIdpregunta(),
             peticion.getEnunciado(),
             tipoPregunta,
-            respuestas // La relación bidireccional se establece después
+            respuestas
         );
     }
 
