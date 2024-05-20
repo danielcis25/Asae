@@ -17,8 +17,8 @@ public class Respuesta {
         this.descripcion = descripcion;
         //this.objPregunta = objPregunta;
     }
-    //private Pregunta objPregunta;
-    //private Docente objDocente;
+    private Pregunta objPregunta;
+    private Docente objDocente;
 
 }
 

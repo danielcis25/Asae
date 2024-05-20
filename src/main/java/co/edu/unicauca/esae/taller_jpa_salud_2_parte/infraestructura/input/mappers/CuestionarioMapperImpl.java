@@ -104,8 +104,8 @@ public class CuestionarioMapperImpl implements CuestionarioMapperInfraestructura
         List<RespuestaDTORespuesta> respuestas = peticion.getListaRespuestas().stream()
             .map(respuesta -> new RespuestaDTORespuesta(
                 respuesta.getIdrespuesta(),
-                respuesta.getDescripcion(),
-                respuesta.getObjPregunta()
+                respuesta.getDescripcion()
+                //respuesta.getObjPregunta()
             ))
             .collect(Collectors.toList());
 
