@@ -3,7 +3,10 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.per
 import java.util.List;
 import java.util.stream.Collectors;
 
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Respuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.CuestionarioDTORespuesta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.RespuestaEntity;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.RespuestasRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
@@ -18,12 +21,14 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.pers
 public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestionarioGatewayIntPort {
 
     private final CuestionarioRepository objCuestionarioRepository;
+    private final RespuestasRepository objRespuestaRepository;
     private final ModelMapper CuestionarioModelMapper;
     private final TipoPreguntasRepository tipoPreguntaRepository;
 
-    public GestionarCuestionarioGatewayImplAdapter(CuestionarioRepository objCuestionarioRepository,
-                                                   ModelMapper CuestionarioModelMapper,TipoPreguntasRepository tipoPreguntaRepository){
+    public GestionarCuestionarioGatewayImplAdapter(CuestionarioRepository objCuestionarioRepository, RespuestasRepository objRespuestaRepository,
+                                                   ModelMapper CuestionarioModelMapper, TipoPreguntasRepository tipoPreguntaRepository){
         this.objCuestionarioRepository = objCuestionarioRepository;
+        this.objRespuestaRepository = objRespuestaRepository;
         this.CuestionarioModelMapper = CuestionarioModelMapper;
         this.tipoPreguntaRepository = tipoPreguntaRepository;
     }
@@ -103,4 +108,15 @@ public class GestionarCuestionarioGatewayImplAdapter implements GestionarCuestio
         }.getType());
         return listCuestionarios;
     }
+
+    @Override
+    public List<Respuesta> listarCuestionariosPorDocente(Integer docente) {
+        Iterable<RespuestaEntity> respuestas = this.objRespuestaRepository.findByidDocente(docente);
+        List<Respuesta> listaObtenida = this.CuestionarioModelMapper.map(respuestas, new TypeToken<List<Respuesta>>() {
+        }.getType());
+        return listaObtenida;
+        //Iterable<CuestionarioEntity> cuestionarios = this.objCuestionarioRepository.findByDocente(docente);
+
+    }
+
 }

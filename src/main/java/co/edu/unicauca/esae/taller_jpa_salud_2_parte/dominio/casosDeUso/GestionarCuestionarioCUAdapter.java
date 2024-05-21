@@ -6,6 +6,7 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.input.GestionarC
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.CuestionarioFormateadorResultadoIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.GestionarCuestionarioGatewayIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Respuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.CuestionarioDTORespuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.ExcepcionesPropias.EntidadNoExisteException;
 
@@ -46,6 +47,15 @@ public class GestionarCuestionarioCUAdapter implements GestionarCuestionarioCUIn
     public List<CuestionarioDTORespuesta> consultarCuestionarioPorPatron(String titulo){
         return this.objGestionarCuestionarioGateway.consultarCuestionarioPorPatron(titulo);
     }
+
+    @Override
+    public List<Respuesta> listarCuestionariosPorDocente(Integer idDocente) {
+
+        return this.objGestionarCuestionarioGateway.listarCuestionariosPorDocente(idDocente);
+
+
+    }
+
 
     @Override
     public Cuestionario consultarCuestionarioPorTitulo(String titulo){

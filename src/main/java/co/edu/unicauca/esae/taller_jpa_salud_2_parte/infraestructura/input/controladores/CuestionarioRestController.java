@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.RespuestaDTORespuesta;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
@@ -67,27 +68,26 @@ public class CuestionarioRestController {
     //             HttpStatus.OK);
     //     return objRespuesta;
     // }
+
     @GetMapping("/cuestionarios")
     public ResponseEntity<List<CuestionarioDTORespuesta>> listar() {
-
         Iterable<Cuestionario> cuestionarios = this.objGestionarCuestionarioCUInt.listarCuestionarios();
         List<CuestionarioDTORespuesta> listCuestionarios = this.modelMapper.map(cuestionarios,
                 new TypeToken<List<CuestionarioDTORespuesta>>() {
                 }.getType());
-
         ResponseEntity<List<CuestionarioDTORespuesta>> objRespuesta = new ResponseEntity<List<CuestionarioDTORespuesta>>
                 (listCuestionarios,
                         HttpStatus.OK
                 );
-
         return objRespuesta;
     }
+
     @GetMapping("/cuestionarios/patron-titulo")
     public ResponseEntity<List<CuestionarioDTORespuesta>> findAllPatron(@RequestParam String patronTitulo ) {
-        List<CuestionarioDTORespuesta> publicaciones = this.objGestionarCuestionarioCUInt.consultarCuestionarioPorPatron(patronTitulo);
+        List<CuestionarioDTORespuesta> cuestionarios = this.objGestionarCuestionarioCUInt.consultarCuestionarioPorPatron(patronTitulo);
 
         ResponseEntity<List<CuestionarioDTORespuesta>> response = new ResponseEntity<List<CuestionarioDTORespuesta>>
-                (publicaciones,
+                (cuestionarios,
                         HttpStatus.OK);
         return response;
     }
@@ -125,6 +125,26 @@ public class CuestionarioRestController {
                 objRespuestaGatewayAdapter.registrarRespuesta(objDocenteCrear, objCuestionarioCrear, objPreguntas);
                 return ResponseEntity.ok().build();
     }
+
+
+    @GetMapping("/consultar-respuestas")
+    public ResponseEntity<List<RespuestaDTORespuesta>> consultarRespuestas(@RequestParam Integer idDocente) {
+        Iterable<Respuesta> respuestas = this.objGestionarCuestionarioCUInt.listarCuestionariosPorDocente(idDocente);
+        List<RespuestaDTORespuesta> listRespuestas = this.modelMapper.map(respuestas,
+                new TypeToken<List<RespuestaDTORespuesta>>() {
+                }.getType());
+
+        ResponseEntity<List<RespuestaDTORespuesta>> objRespuesta = new ResponseEntity<List<RespuestaDTORespuesta>>
+                (listRespuestas,
+                        HttpStatus.OK
+                );
+        return objRespuesta;
+    }
+
+
+
+
+
     //===
 
 }

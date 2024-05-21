@@ -24,5 +24,6 @@ public interface CuestionarioRepository extends JpaRepository<CuestionarioEntity
 
     CuestionarioEntity findByTitulo(String titulo);
 
+
 }
     
