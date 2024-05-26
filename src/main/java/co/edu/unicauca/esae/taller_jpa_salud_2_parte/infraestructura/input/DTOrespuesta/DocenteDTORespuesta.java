@@ -1,6 +1,7 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class DocenteDTORespuesta {
     private String correo;
     private String vinculacion;
     private TelefonoDTORespuesta objTelefono;
-    //JSONIgnore
+    @JsonIgnore
     private List<RespuestaDTORespuesta> listaRespuestas;
     private List<DepartamentoDTORespuesta> listaDepartamentos;
 

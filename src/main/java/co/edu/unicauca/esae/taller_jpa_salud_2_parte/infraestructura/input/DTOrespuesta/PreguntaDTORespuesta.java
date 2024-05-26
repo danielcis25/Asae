@@ -2,6 +2,7 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOr
 import java.util.List;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ public class PreguntaDTORespuesta {
 
     private int idpregunta;
     private String enunciado;
+    @JsonIgnore
 	private List<RespuestaDTORespuesta> listaRespuestas;
     private TipoPreguntaDTORespuesta objTipoPregunta;
     //private CuestionarioDTORespuesta objCuestionario;

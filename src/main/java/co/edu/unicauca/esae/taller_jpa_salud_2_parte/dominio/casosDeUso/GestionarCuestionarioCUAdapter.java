@@ -8,7 +8,10 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.Gestionar
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Cuestionario;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Respuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.CuestionarioDTORespuesta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.PreguntaDTORespuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.ExcepcionesPropias.EntidadNoExisteException;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.CuestionarioEntity;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.PreguntaEntity;
 
 public class GestionarCuestionarioCUAdapter implements GestionarCuestionarioCUIntPort {
 
@@ -29,8 +32,6 @@ public class GestionarCuestionarioCUAdapter implements GestionarCuestionarioCUIn
         if(this.objGestionarCuestionarioGateway.existeCuestionarioPorTitulo(cuestionario.getTitulo())){
             this.objCuestionarioFormateadorResultados.retornarRespuestaErrorEntidadExiste("Error, se encuentra en el sistema un Cuestionario con el titulo ingresado ");
         }else{
-            //preguntar si se pasa titulo? o todos los atributos o el objCuestionario
-            //cuestionario.setTitulo(cuestionario.getTitulo());
             objCuestionarioCreado = this.objGestionarCuestionarioGateway.guardarCuestionario(cuestionario);
         }
         return objCuestionarioCreado;
@@ -53,6 +54,19 @@ public class GestionarCuestionarioCUAdapter implements GestionarCuestionarioCUIn
 
         return this.objGestionarCuestionarioGateway.listarCuestionariosPorDocente(idDocente);
 
+
+    }
+
+    @Override
+    public CuestionarioDTORespuesta obtenerCuestionarioDTOPorRespuesta(Integer idRespuesta) {
+        return this.objGestionarCuestionarioGateway.obtenerCuestionarioDTOPorRespuesta(idRespuesta);
+
+    }
+
+    @Override
+    public List<PreguntaDTORespuesta> obtenerPreguntasPorCuestionario(Integer idCuestionario) {
+
+        return this.objGestionarCuestionarioGateway.obtenerPreguntasDTOPorCuestionario(idCuestionario);
 
     }
 

@@ -1,6 +1,7 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios;
 
 
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.PreguntaEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.RespuestaEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,4 +12,8 @@ public interface RespuestasRepository extends CrudRepository<RespuestaEntity, In
 
     @Query("SELECT p FROM RespuestaEntity p WHERE p.objDocente.idpersona = :idDocente")
     List<RespuestaEntity> findByidDocente(Integer idDocente);
+
+    @Query("SELECT p FROM RespuestaEntity p WHERE p.objPregunta.idpregunta = :idPregunta")
+    List<RespuestaEntity> findByPregunta(Integer idPregunta);
+
 }

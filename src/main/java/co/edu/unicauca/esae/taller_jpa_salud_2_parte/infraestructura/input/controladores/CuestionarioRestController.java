@@ -1,11 +1,17 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.controladores;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.input.GestionarDocenteCUIntPort;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.PreguntaDTORespuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.RespuestaDTORespuesta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.CuestionarioEntity;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.DocenteEntity;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.PreguntaEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
@@ -38,19 +44,12 @@ import lombok.RequiredArgsConstructor;
 public class CuestionarioRestController {
 
     private final GestionarCuestionarioCUIntPort objGestionarCuestionarioCUInt;
+    private final GestionarDocenteCUIntPort objGestionarDocenteCUInt;
     private final GestionarRespuestaGatewayIntPort objRespuestaGatewayAdapter;
     private final ModelMapper modelMapper;
     private final CuestionarioMapperInfraestructuraDominio objMapeador;
 
-    // @PostMapping("/cuestionarios")
-    // public ResponseEntity<CuestionarioDTORespuesta> create(@Valid @RequestBody CuestionarioDTOPeticion objCuestionario) {
-    //     Cuestionario objCuestionarioCrear = objMapeador.mappearDePeticionACuestionario(objCuestionario);
-    //     Cuestionario objCuestionarioCreado = objGestionarCuestionarioCUInt.crearCuestionario(objCuestionarioCrear);
-    //     ResponseEntity<CuestionarioDTORespuesta> objRespuesta = new ResponseEntity<CuestionarioDTORespuesta>(
-    //             objMapeador.mappearDeCuestionarioARespuesta(objCuestionarioCreado),
-    //             HttpStatus.CREATED);
-    //     return objRespuesta;
-    // }
+
     @PostMapping("/cuestionarios")
     public ResponseEntity<CuestionarioDTORespuesta> create(@Valid @RequestBody CuestionarioDTOPeticion objCuestionario) {
         Cuestionario objCuestionarioCrear = modelMapper.map(objCuestionario,Cuestionario.class);
@@ -61,13 +60,6 @@ public class CuestionarioRestController {
         return objRespuesta;
     }
 
-    // @GetMapping("/cuestionarios")
-    // public ResponseEntity<List<CuestionarioDTORespuesta>> listar() {
-    //     ResponseEntity<List<CuestionarioDTORespuesta>> objRespuesta = new ResponseEntity<List<CuestionarioDTORespuesta>>(
-    //             objMapeador.mappearDeCuestionariosARespuesta(this.objGestionarCuestionarioCUInt.listarCuestionarios()),
-    //             HttpStatus.OK);
-    //     return objRespuesta;
-    // }
 
     @GetMapping("/cuestionarios")
     public ResponseEntity<List<CuestionarioDTORespuesta>> listar() {
@@ -92,21 +84,7 @@ public class CuestionarioRestController {
         return response;
     }
 
-    //=========
-//     @PostMapping("/registrar-respuestas")
-//     public ResponseEntity<Void> registrarRespuestas(@ModelAttribute DocenteDTOPeticion docente,
-//             @ModelAttribute CuestionarioDTOPeticion cuestionario,
-//             @ModelAttribute List<PreguntaDTOPeticion> preguntas) {
-//                 Docente objDocenteCrear = modelMapper.map(docente,Docente.class);
-//                 Cuestionario objCuestionarioCrear = modelMapper.map(cuestionario,Cuestionario.class);
-//                 List<Pregunta> objPreguntas = preguntas.stream()
-//                 .map(preguntaDTO -> modelMapper.map(preguntaDTO, Pregunta.class))
-//                 .collect(Collectors.toList());
 
-  
-//         objRespuestaGatewayAdapter.registrarRespuesta(objDocenteCrear, objCuestionarioCrear, objPreguntas);
-//         return ResponseEntity.ok().build();
-//     }
         @PostMapping("/registrar-respuestas")
         public ResponseEntity<Void> registrarRespuestas(@RequestBody Map<String, Object> request) {
                 // Extraer los objetos del mapa
@@ -129,22 +107,32 @@ public class CuestionarioRestController {
 
     @GetMapping("/consultar-respuestas")
     public ResponseEntity<List<RespuestaDTORespuesta>> consultarRespuestas(@RequestParam Integer idDocente) {
-        Iterable<Respuesta> respuestas = this.objGestionarCuestionarioCUInt.listarCuestionariosPorDocente(idDocente);
-        List<RespuestaDTORespuesta> listRespuestas = this.modelMapper.map(respuestas,
+        System.out.println(" contrrolle idDocente: " + idDocente);
+        DocenteDTORespuesta docente = this.objGestionarDocenteCUInt.obtenerDocenteDTOPorId(idDocente);
+        System.out.println("docenteDTO: " + docente.toString() + docente.getNombres());
+
+        Iterable<Respuesta> resp = this.objGestionarCuestionarioCUInt.listarCuestionariosPorDocente(idDocente);
+        List<RespuestaDTORespuesta> listaRespuestas = this.modelMapper.map(resp,
                 new TypeToken<List<RespuestaDTORespuesta>>() {
                 }.getType());
+        for (RespuestaDTORespuesta respuesta : listaRespuestas) {
+            CuestionarioDTORespuesta cuestionario = this.objGestionarCuestionarioCUInt.obtenerCuestionarioDTOPorRespuesta(respuesta.getIdrespuesta());
 
-        ResponseEntity<List<RespuestaDTORespuesta>> objRespuesta = new ResponseEntity<List<RespuestaDTORespuesta>>
-                (listRespuestas,
-                        HttpStatus.OK
-                );
-        return objRespuesta;
+            List<PreguntaDTORespuesta> preguntas = objGestionarCuestionarioCUInt.obtenerPreguntasPorCuestionario(cuestionario.getIdcuestionario());
+            objRespuestaGatewayAdapter.consultarRespuesta(docente, cuestionario, preguntas);
+
+            respuesta.setObjCuestionario(cuestionario);
+            respuesta.setObjDocente(docente);
+            respuesta.setPreguntas(preguntas);
+
+        }
+
+        return new ResponseEntity<>(listaRespuestas, HttpStatus.OK);
     }
 
 
 
 
-
-    //===
-
 }
+
+

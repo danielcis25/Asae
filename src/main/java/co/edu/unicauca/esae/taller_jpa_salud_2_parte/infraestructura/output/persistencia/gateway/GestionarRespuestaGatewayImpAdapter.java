@@ -1,7 +1,11 @@
 package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.gateway;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.CuestionarioDTORespuesta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.DocenteDTORespuesta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.PreguntaDTORespuesta;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +74,36 @@ public class GestionarRespuestaGatewayImpAdapter implements GestionarRespuestaGa
         }
 
     }
+
+
+    @Override
+    public void consultarRespuesta(DocenteDTORespuesta docente, CuestionarioDTORespuesta cuestionario, List<PreguntaDTORespuesta> preguntas) {
+        System.out.println("ENTRO A CONSULTAR RESPUESTA");
+        System.out.println("ENTRO A CONSULTAR RESPUESTA"+docente.getIdPersona());
+        DocenteEntity docenteEntity = objDocenteRepository.findById(docente.getIdPersona())
+                .orElseThrow(() -> new IllegalArgumentException("Docente no encontrado"));
+
+        CuestionarioEntity cuestionarioEntity = objCuestionarioRepository.findById(cuestionario.getIdcuestionario())
+                .orElseThrow(() -> new IllegalArgumentException("Cuestionario no encontrado"));
+
+        for (PreguntaDTORespuesta preguntaDTO : preguntas) {
+            PreguntaEntity preguntaEntity = objPreguntasRepository.findById(preguntaDTO.getIdpregunta())
+                    .orElseThrow(() -> new IllegalArgumentException("Pregunta no encontrada"));
+
+            List<RespuestaEntity> respuestasEntity = objRespuestasRepository.findByPregunta(preguntaEntity.getIdpregunta());
+            List<Respuesta> respuestas = respuestasEntity.stream()
+                    .map(respuestaEntity -> DocenteModelMapper.map(respuestaEntity, Respuesta.class))
+                    .collect(Collectors.toList());
+
+            List<RespuestaDTORespuesta> listaRespuestas = respuestas.stream()
+                    .map(respuesta -> {
+                        RespuestaDTORespuesta respuestaEnt = DocenteModelMapper.map(respuesta, RespuestaDTORespuesta.class);
+                        return respuestaEnt;
+                    })
+                    .collect(Collectors.toList());
+            preguntaDTO.setListaRespuestas(listaRespuestas);
+        }
+    }
+
 
 }

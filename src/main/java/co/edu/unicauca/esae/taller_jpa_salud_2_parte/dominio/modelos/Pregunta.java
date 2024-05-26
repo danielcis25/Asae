@@ -31,4 +31,16 @@ public class Pregunta {
         this.listaRespuestas = respuestas == null ? new ArrayList<>() : (List<Respuesta>) respuestas;
 
     }
+
+    @Override
+    public String toString() {
+        return "Pregunta{" +
+                "idpregunta=" + idpregunta +
+                ", enunciado='" + enunciado + '\'' +
+                ", tipoPregunta=" + objTipoPregunta +
+                // Evitar imprimir listaRespuestas directamente para evitar la recursión infinita
+                ", numRespuestas=" + (listaRespuestas != null ? listaRespuestas.size() : 0) +
+                '}';
+    }
+
 }

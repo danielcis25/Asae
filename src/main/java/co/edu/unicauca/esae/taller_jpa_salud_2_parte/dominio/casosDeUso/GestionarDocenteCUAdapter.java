@@ -7,6 +7,7 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.Cuestiona
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.output.GestionarDocenteGatewayIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Departamento;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Docente;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.DocenteDTORespuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.ExcepcionesPropias.EntidadNoExisteException;
 
 public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
@@ -39,6 +40,13 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
         //List<Docente> listaObtenida = objGestionarDocenteateway.listar();
         //return listaObtenida;
         return this.objGestionarDocenteGateway.listar();
+    }
+
+    @Override
+    public DocenteDTORespuesta obtenerDocenteDTOPorId(int idDocente) {
+        System.out.println("1 ID DOCENTE: "+idDocente);
+        return this.objGestionarDocenteGateway.consultarDocentePorId(idDocente);
+
     }
 
 

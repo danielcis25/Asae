@@ -20,5 +20,15 @@ public class Respuesta {
     private Pregunta objPregunta;
     private Docente objDocente;
 
+    @Override
+    public String toString() {
+        return "Respuesta{" +
+                "idrespuesta=" + idrespuesta +
+                ", descripcion='" + descripcion + '\'' +
+                // Evitar imprimir pregunta directamente para evitar la recursión infinita
+                ", preguntaId=" + (objPregunta != null ? objPregunta.getIdpregunta() : null) +
+                '}';
+    }
+
 }
 

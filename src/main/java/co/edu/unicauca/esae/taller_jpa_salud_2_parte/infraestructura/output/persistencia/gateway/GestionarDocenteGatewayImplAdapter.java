@@ -3,6 +3,7 @@ package co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.per
 import java.util.List;
 
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Departamento;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.DocenteDTORespuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.DepartamentoEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.repositorios.DepartamentoRepository;
 import org.modelmapper.ModelMapper;
@@ -73,8 +74,8 @@ public class GestionarDocenteGatewayImplAdapter implements GestionarDocenteGatew
     }
 
     @Override
-    public Docente consultarDocentePorId(int id) {
-        return this.DocenteModelMapper.map(this.objDocenteRepository.findById(id), Docente.class);
+    public DocenteDTORespuesta consultarDocentePorId(int id) {
+        return this.DocenteModelMapper.map(this.objDocenteRepository.findById(id).get(), DocenteDTORespuesta.class);
     }
 
 }
