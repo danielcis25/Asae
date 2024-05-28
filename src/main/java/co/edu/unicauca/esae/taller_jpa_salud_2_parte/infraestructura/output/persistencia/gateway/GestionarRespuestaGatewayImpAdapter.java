@@ -16,6 +16,7 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Pregunta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.dominio.modelos.Respuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOpeticion.RespuestaDTOPeticion;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.RespuestaDTORespuesta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.ExcepcionesPropias.DocenteYaRespondioException;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.CuestionarioEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.DocenteEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.PreguntaEntity;
@@ -42,7 +43,9 @@ public class GestionarRespuestaGatewayImpAdapter implements GestionarRespuestaGa
     }
     @Override
     public void registrarRespuesta(Docente objDocente, Cuestionario objCuestionario,List<Pregunta> objPreguntas) {
+        
         //validacion existencia docente 
+
         DocenteEntity docente = objDocenteRepository.findById(objDocente.getIdpersona()).
         orElseThrow(() -> new IllegalArgumentException("Docente no encontrado"));
 
@@ -51,6 +54,11 @@ public class GestionarRespuestaGatewayImpAdapter implements GestionarRespuestaGa
         .orElseThrow(() -> new IllegalArgumentException("Cuestionario no encontrado"));
 
         for(Pregunta preguntaDTO: objPreguntas){
+             // Verificar si el docente ya ha respondido la pregunta
+            boolean existeRespuesta = objRespuestasRepository.existsByObjDocenteIdpersonaAndObjPreguntaIdpregunta(objDocente.getIdpersona(), preguntaDTO.getIdpregunta());
+            if (existeRespuesta) {
+                throw new DocenteYaRespondioException("El docente ya ha respondido la pregunta con ID: " + preguntaDTO.getIdpregunta());
+            }
             //validacion existenia de pregunta asocaida a la respuesta
             PreguntaEntity pregunta = objPreguntasRepository.findById(preguntaDTO.getIdpregunta())
             .orElseThrow(() -> new IllegalArgumentException("Pregunta no encontrada"));

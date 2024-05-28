@@ -11,6 +11,7 @@ public class CuestionarioFormateadorResultadoImplAdapter implements Cuestionario
     public void retornarRespuestaErrorEntidadExiste(String mensaje) {
         EntidadYaExisteException objException = new EntidadYaExisteException(mensaje);
         throw objException;   
+        // throw new EntidadYaExisteException(mensaje);
     }
 
     @Override

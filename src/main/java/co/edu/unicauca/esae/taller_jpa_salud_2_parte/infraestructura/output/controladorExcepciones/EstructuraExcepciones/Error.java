@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class Error {
     /**
    * Código de error de la aplicación
@@ -26,12 +27,12 @@ public class Error {
     /**
      * Url de la petición que generó el error
      */
-    @Accessors(chain = true)
+    // @Accessors(chain = true)
     private String url;
     /**
      * Método de la petición que generó el error
      */
-    @Accessors(chain = true)
+    // @Accessors(chain = true)
     private String metodo;
 
 }

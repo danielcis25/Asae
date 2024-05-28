@@ -13,7 +13,7 @@ import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.pers
 
 
 public interface GestionarRespuestaGatewayIntPort {
-    public void registrarRespuesta(Docente docente,Cuestionario cuestionario,List<Pregunta> preguntas);
+    public void registrarRespuesta(Docente docente,Cuestionario cuestionario,List<Pregunta> preguntas) throws Exception;
 
     public void consultarRespuesta(DocenteDTORespuesta docente, CuestionarioDTORespuesta cuestionario, List<PreguntaDTORespuesta> preguntas);
 

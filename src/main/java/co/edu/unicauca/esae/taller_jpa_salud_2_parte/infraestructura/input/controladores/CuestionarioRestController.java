@@ -9,6 +9,10 @@ import javax.validation.Valid;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.aplicacion.input.GestionarDocenteCUIntPort;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.PreguntaDTORespuesta;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.input.DTOrespuesta.RespuestaDTORespuesta;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.EstructuraExcepciones.CodigoError;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.EstructuraExcepciones.Error;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.EstructuraExcepciones.ErrorUtils;
+import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.controladorExcepciones.ExcepcionesPropias.DocenteYaRespondioException;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.CuestionarioEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.DocenteEntity;
 import co.edu.unicauca.esae.taller_jpa_salud_2_parte.infraestructura.output.persistencia.entidades.PreguntaEntity;
@@ -17,6 +21,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -86,23 +91,31 @@ public class CuestionarioRestController {
 
 
         @PostMapping("/registrar-respuestas")
-        public ResponseEntity<Void> registrarRespuestas(@RequestBody Map<String, Object> request) {
-                // Extraer los objetos del mapa
-                ObjectMapper mapper = new ObjectMapper();
+        public ResponseEntity<?> registrarRespuestas(@RequestBody Map<String, Object> request) {
+                try{
+                        // Extraer los objetos del mapa
+                        ObjectMapper mapper = new ObjectMapper();
 
-                DocenteDTOPeticion docente = mapper.convertValue(request.get("docente"), DocenteDTOPeticion.class);
-                CuestionarioDTOPeticion cuestionario = mapper.convertValue(request.get("cuestionario"), CuestionarioDTOPeticion.class);
-                List<PreguntaDTOPeticion> preguntas = mapper.convertValue(request.get("preguntas"), new TypeReference<List<PreguntaDTOPeticion>>() {});
+                        DocenteDTOPeticion docente = mapper.convertValue(request.get("docente"), DocenteDTOPeticion.class);
+                        CuestionarioDTOPeticion cuestionario = mapper.convertValue(request.get("cuestionario"), CuestionarioDTOPeticion.class);
+                        List<PreguntaDTOPeticion> preguntas = mapper.convertValue(request.get("preguntas"), new TypeReference<List<PreguntaDTOPeticion>>() {});
 
-                Docente objDocenteCrear = modelMapper.map(docente,Docente.class);
-                Cuestionario objCuestionarioCrear = modelMapper.map(cuestionario,Cuestionario.class);
-                List<Pregunta> objPreguntas = preguntas.stream()
-                        .map(preguntaDTO -> modelMapper.map(preguntaDTO, Pregunta.class))
-                        .collect(Collectors.toList());
+                        Docente objDocenteCrear = modelMapper.map(docente,Docente.class);
+                        Cuestionario objCuestionarioCrear = modelMapper.map(cuestionario,Cuestionario.class);
+                        List<Pregunta> objPreguntas = preguntas.stream()
+                                .map(preguntaDTO -> modelMapper.map(preguntaDTO, Pregunta.class))
+                                .collect(Collectors.toList());
 
-                objRespuestaGatewayAdapter.registrarRespuesta(objDocenteCrear, objCuestionarioCrear, objPreguntas);
-                return ResponseEntity.ok().build();
-    }
+                        objRespuestaGatewayAdapter.registrarRespuesta(objDocenteCrear, objCuestionarioCrear, objPreguntas);
+                        return ResponseEntity.ok().build();
+                }catch (DocenteYaRespondioException e) {
+                        Error error = ErrorUtils.crearError(CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(), e.getMessage(), HttpStatus.BAD_REQUEST.value());
+                        return ResponseEntity.badRequest().body(error);
+                } catch (Exception e) {
+                        Error error = ErrorUtils.crearError(CodigoError.ERROR_GENERICO.getCodigo(), CodigoError.ERROR_GENERICO.getLlaveMensaje(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+                }
+        }
 
 
     @GetMapping("/consultar-respuestas")

@@ -33,19 +33,25 @@ public class RestApiExceptionHandler {
                                 .setUrl(req.getRequestURL().toString()).setMetodo(req.getMethod());
                 return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
+        //===========
+        // @ExceptionHandler(EntidadYaExisteException.class)
+        // public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+        //                 final EntidadYaExisteException ex) {
+        //         final Error error = ErrorUtils
+        //                         .crearError(CodigoError.ENTIDAD_YA_EXISTE.getCodigo(),
+        //                                         String.format("%s, %s", CodigoError.ENTIDAD_YA_EXISTE.getLlaveMensaje(),
+        //                                                         ex.getMessage()),
+        //                                         HttpStatus.NOT_ACCEPTABLE.value())
+        //                         .setUrl(req.getRequestURL().toString()).setMetodo(req.getMethod());
+        //         return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+        // }
         @ExceptionHandler(EntidadYaExisteException.class)
-        public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
-                        final EntidadYaExisteException ex) {
-                final Error error = ErrorUtils
-                                .crearError(CodigoError.ENTIDAD_YA_EXISTE.getCodigo(),
-                                                String.format("%s, %s", CodigoError.ENTIDAD_YA_EXISTE.getLlaveMensaje(),
-                                                                ex.getMessage()),
-                                                HttpStatus.NOT_ACCEPTABLE.value())
-                                .setUrl(req.getRequestURL().toString()).setMetodo(req.getMethod());
-                return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+        @ResponseStatus(HttpStatus.CONFLICT)  // Puedes usar HttpStatus.CONFLICT (409) para indicar un conflicto de datos
+        public ResponseEntity<String> handleEntidadYaExisteException(EntidadYaExisteException ex) {
+        // Puedes devolver una estructura de JSON más detallada si lo prefieres
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
         }
-
+//========================================
         @ExceptionHandler(ReglaNegocioExcepcion.class)
         public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
                         final ReglaNegocioExcepcion ex, final Locale locale) {
